@@ -1,0 +1,78 @@
+.store-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 15px;
+}
+.store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 16px;
+    margin-bottom: 17px;
+}
+
+.store-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px;
+}
+
+.store-info {
+    display: flex;
+    align-items: center;
+}
+
+.store-arrow {
+    font-size: 18px;
+    color: #ccc;
+}
+
+.store-logo {
+    border-radius: 50%;
+    width: 41px;
+    margin-right: 10px;
+}
+
+.store-arrow {
+    font-size: 18px;
+    color: #ccc;
+}
+
+.stat {
+    flex: 1 1 45%;
+    margin-bottom: 10px;
+    max-width: 159px;
+}
+
+.stat-label {
+    color: #6d7882;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.stat-value {
+    font-size: 15px;
+    color: #0e2539;
+    font-weight: 600;
+}
+.store-arrow img {
+    padding: 5px;
+}
+
+.store-name {
+    font-size: 17px;
+    color: #0e2539;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+
+.store-username {
+    color: #6d7882;
+}

@@ -1,0 +1,89 @@
+.tasks-page{
+    margin-bottom: 70px;
+}
+
+.stores-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.stores-header .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0e2539;
+}
+
+.store-logo {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.filter {
+    font-size: 14px;
+    color: #ff4081;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.your-stores {
+    padding: 10px 16px 0 16px;
+}
+
+
+.dropdown-content {
+    position: fixed;
+    min-width: 160px;
+    width: 95%;
+    bottom: 10%;
+    left: 12px;
+    text-align: center;
+    z-index: 40;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+    border-radius: 14px;
+    transition: 0.5s ease-in-out;
+}
+
+.dropdown-item.cancel {
+    color: #d53e76;
+    border-radius: 14px;
+    border-bottom: none;
+    margin-top: 15px;
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.dropdown-item {
+    padding: 17px 16px;
+    text-decoration: none;
+    display: block;
+    color: #1a4265;
+    font-weight: 500;
+    border-bottom: 0.5px solid #b9b9bb;
+    background-color: #fff;
+    font-size: 17px;
+}
+
+.dropdown-item:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.dropdown-item:nth-child(4) {
+    border-radius: 0 0 12px 12px;
+}
+
+.dropdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: block;
+    z-index: 10;
+    transition: background-color 0.5s ease-in-out;
+}

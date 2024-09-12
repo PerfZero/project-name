@@ -1,0 +1,58 @@
+
+  
+  .footer-buttons {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    text-align: center;
+    padding: 0;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 5;
+    color: #1a4265;  }
+  
+  .footer-button {
+    margin: 0 10px;
+    padding: 10px;
+    text-decoration: none;
+    color: #999999;
+    fill: #999999;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+    flex-direction: column;
+    width: 33%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .footer-button.active {
+    color: #1a4265;
+    fill:#1a4265 ;
+
+  }
+
+  
+  .footer-icon {
+    fill: inherit; /* Иконка будет наследовать цвет родителя */
+    font-size: 1.5em; /* Настройте размер иконки */
+  }
+
+  .footer-icon  path {
+    fill: inherit; /* Иконка будет наследовать цвет родителя */
+  }
+  
+  .footer-text {
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+      

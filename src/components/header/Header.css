@@ -1,0 +1,51 @@
+
+.catalog-h {
+    height: 100vh; /* 100vh минус высота футера */
+  }
+  
+  .header {
+    padding: 40px 16px 20px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .profile_date {
+    flex: 1;
+    align-self: center;
+    margin-left: 10px;
+  }
+  .header img {
+    width: 30%;
+  }
+  
+  .header .name {
+    font-size: 17px;
+    font-weight: bold;
+    color: #0e2539;
+  }
+  .header .username {
+    color: #6d7882;
+    font-size: 15px;
+  }
+  .connect-wallet {
+    display: inline-block;
+    padding: 7px 13px;
+    background-color: #1a4265;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    align-content: center;
+    width: 41%;
+  }
+  
+  .connect-wallet p {
+    font-size: 16px;
+  }
+
+  .connect-wallet p::before {
+    display: inline-block;
+    content: url(./wallet.svg);
+    margin-right: 17px;
+    width: 2vw;
+  }

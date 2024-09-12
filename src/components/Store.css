@@ -1,0 +1,68 @@
+
+
+.screen1-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.screen1-header h1 {
+  margin: 0;
+}
+
+.connect-wallet {
+  display: inline-block;
+  padding: 7px 13px;
+  background-color: #1a4265;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  align-content: center;
+}
+
+.connect-wallet:hover {
+  background-color: #0056b3;
+}
+
+.stories-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.story {
+  width: 23%;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+.story-image {
+  width: 100%;
+  height: auto;
+}
+
+.story-title {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.text-blocks {
+  margin-top: 20px;
+}
+
+.text-block {
+  margin-bottom: 20px;
+}
+
+.text-block h2 {
+  margin-top: 0;
+}
+
+.text-block p {
+  font-size: 16px;
+  line-height: 1.5;
+}

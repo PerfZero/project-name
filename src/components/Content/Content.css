@@ -1,0 +1,35 @@
+.content {
+    text-align: center;
+    padding: 0 20px 0 20px;
+}
+
+.content img {
+    width: 110px;
+    height: 110px;
+}
+
+.content .title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.content .description {
+    margin-top: 16px;
+    font-size: 15px;
+}
+
+.btn {
+    display: block;
+    padding: 12px 30px;
+    background-color: #d53e76;
+    color: white;
+    border-radius: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    border: 3px solid #d53e76;
+}
+.main-btn {
+    margin-top: 24px;
+}   

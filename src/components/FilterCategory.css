@@ -1,0 +1,50 @@
+.page-category.active {
+    visibility: visible;
+    transform: translateY(0);
+    bottom: 1%;
+}
+
+.filter-items.active {
+    background-color: #f0f0f0; /* Пример стиля для активного элемента */
+    font-weight: bold;
+  }
+  
+
+  .filter-popup{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #efeff3;
+    height: 100vh;
+    width: 100%;
+    z-index: 50;
+    position: fixed;
+    left: 0;
+    visibility: visible;
+    transform: translateY(0);
+    bottom: 1%;
+    transition: all 0.5s ease-in-out;
+    
+  }
+
+  .filter-popup-content{
+    width: 90%;
+    border-radius: 12px;
+    background-color: #fff;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding-left: 20px;
+    margin: 20px auto;
+
+  }
+
+  .filter-popup .filter-item:last-child {
+    border-bottom: none !important;
+}
+
+.filter-popup .filter-item {
+    border-bottom: 1px solid #dbdbdb !important;
+    border-radius: 0;
+    padding: 11px 0;
+  }

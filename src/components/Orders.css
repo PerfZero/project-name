@@ -1,0 +1,130 @@
+.order-contents {
+    background-color: #efeff3;
+    padding: 16px;
+}
+
+.order-filter {
+    background-color: #fff;
+    padding: 0 0 0 12px;
+    border-radius: 10px;
+}
+
+.filter-class-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: 11px 0;
+    border-bottom: 1px solid #dbdbdb;
+    font-family: "SF Pro Display", sans-serif;
+    font-weight: 400;
+}
+
+.filter-item {
+    margin-right: 8px;
+    color: #000;
+    font-weight: 400;
+    font-size: 17px;
+    font-family: "SF Pro Display", sans-serif;
+}
+
+.filter-detail {
+    color: rgba(60, 60, 67, 0.6);
+    padding-right: 15px;
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.filter-class-item:last-child {
+    border-bottom: none;
+}
+
+.orders {
+    padding: 0 16px 16px 16px;
+    height: 100vh;
+}
+
+.order-contents {
+    background-color: #efeff3;
+    padding: 16px;
+}
+
+.order-filter {
+    background-color: #fff;
+    padding: 0 0 0 12px;
+    border-radius: 10px;
+}
+
+.order-main_sec {
+    position: relative;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 16px 0;
+    width: 100%;
+}
+
+.number-item {
+    display: flex;
+    justify-content: flex-start !important;
+    border-bottom: none;
+    padding: 0;
+}
+
+.filter-item {
+    margin-right: 8px;
+    color: #000;
+    font-weight: 400;
+    font-size: 17px;
+    font-family: "SF Pro Display", sans-serif;
+}
+
+.number {
+    margin-right: 8px;
+    color: #0e2539 !important;
+    font-weight: 500 !important;
+    font-size: 17px;
+}
+
+.status {
+    font-size: 11px !important;
+    color: #3c7d46 !important;
+    background-color: #e6ffea;
+    text-align: center;
+    align-content: center;
+    padding-right: 0 !important;
+
+    padding: 2px 5px !important;
+    border-radius: 6px;
+}
+
+.canceled {
+    color: #a94040 !important;
+    background-color: #fce9e9;
+}
+
+.order-main_sec:last-child {
+    border-bottom: none;
+}
+
+.filter-detail {
+    color: rgba(60, 60, 67, 0.6);
+    padding-right: 15px;
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.number-list__info {
+    font-size: 13px;
+    color: #6d7882;
+}
+
+.number-list__list {
+    padding-top: 5px;
+}
+
+.order-filter {
+    background-color: #fff;
+    padding: 0 0 0 12px;
+    border-radius: 10px;
+}

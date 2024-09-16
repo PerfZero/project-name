@@ -14,6 +14,7 @@ const Tasks = () => {
   // Данные магазинов (пример)
   const stores = [
     {
+      id: '1',
       name: 'Toy Seller',
       username: '@ToySellerBot',
       revenue: '$27,392.00',
@@ -23,28 +24,6 @@ const Tasks = () => {
       partnerPayments: '$428.00',
       unpaidOrders: 8,
     },
-
-    {
-        name: 'Toy Seller',
-        username: '@ToySellerBot',
-        revenue: '$27,392.00',
-        orders: 64,
-        avgBill: '$428.00',
-        repeatOrders: 12,
-        partnerPayments: '$428.00',
-        unpaidOrders: 8,
-      },
-
-      {
-        name: 'Toy Seller',
-        username: '@ToySellerBot',
-        revenue: '$27,392.00',
-        orders: 64,
-        avgBill: '$428.00',
-        repeatOrders: 12,
-        partnerPayments: '$428.00',
-        unpaidOrders: 8,
-      },
     // Добавьте другие магазины здесь...
   ];
 
@@ -93,8 +72,8 @@ const Tasks = () => {
         </div>
 
         {/* Отображение магазинов */}
-        {stores.map((store, index) => (
-          <StoreCard key={index} store={store} />
+        {stores.map((store) => (
+          <StoreCard key={store.id} store={store} />
         ))}
       </div>
       

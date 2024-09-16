@@ -1,0 +1,6 @@
+.container_wrap {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    width: 92%;
+}

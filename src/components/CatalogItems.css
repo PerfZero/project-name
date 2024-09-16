@@ -1,0 +1,42 @@
+.catalog-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #dbdbdb;
+    border-radius: 12px 12px 0 0;
+    padding: 0;
+}
+
+
+.catalog-item:last-child {
+    border-bottom: none;
+    border-radius:  0 0 12px 12px;
+    padding: 0;
+}
+
+.image-catalog::before {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    bottom: 0;
+    border-radius: 50%;
+    background-color: #62cf50;
+    margin-right: 12px;
+}
+
+.image-catalog {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.catalog-status {
+    color: #8e8e92;
+    background-color: #f4f4f5;
+}
+
+.off-catalog::before {
+    background-color: #d2d2d2;
+}

@@ -1,16 +1,17 @@
 import React from 'react';
-import './StoreCard.css'; // Добавьте свои стили для StoreCard
+import './StoreCard.css'; // Импортируйте файл стилей
 import arrow from '../components/icons/arrow-rgth.svg'; // Импортируйте изображение
 import Store from '../components/icons/store-cion.svg'; // Импортируйте изображение
 
-
 const StoreCard = ({ store }) => {
+  // Отладочный вывод
+  console.log('Store data:', store);
+
   return (
     <div className="store-card">
       <div className="store-header">
         <div className="store-info">
-        <img src={Store} alt="Arrow" className="store-logo" />
-
+          <img src={Store} alt="Store Logo" className="store-logo" />
           <div>
             <div className="store-name">{store.name}</div>
             <a href={`https://t.me/${store.username}`}>
@@ -19,7 +20,8 @@ const StoreCard = ({ store }) => {
           </div>
         </div>
         <div className="store-arrow">
-          <a href="/order.html">
+          {/* Обновите ссылку на уникальный URL деталей */}
+          <a href={`/store/${store.id}/orders`}>
             <img src={arrow} alt="Arrow" className="arrow" />
           </a>
         </div>

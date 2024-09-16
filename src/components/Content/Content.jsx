@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Импортируем Link
 import './Content.css';
 import moneyImage from './money.png'; // Убедитесь, что путь к изображению корректен
 
@@ -14,9 +15,10 @@ const Content = () => {
         SPRUTON definitely simplest and useful <br />
         platform for e-commerce.
       </div>
-      <a href="/create-shop.html" className="btn create-store main-btn">
+      {/* Используем Link вместо a для перехода по маршруту */}
+      <Link to="/create-store/step1" className="btn create-store main-btn">
         Create store
-      </a>
+      </Link>
     </div>
   );
 };

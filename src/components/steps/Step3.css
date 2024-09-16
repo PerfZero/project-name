@@ -1,0 +1,126 @@
+.shop_logo-load {
+    border-radius: 12px;
+    width: 168px;
+    overflow: hidden;
+    height: 90px;
+}
+textarea {
+    height: 75px;
+}
+
+
+.logo-preview {
+    max-width: 168px;
+    max-height: 90px;
+    margin-top: 0px;
+    position: absolute;
+    border-radius: 12px;
+
+  }
+
+  .remove-logo-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 12px;
+  }
+  
+  .upload-button {
+    font-weight: 100 !important;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #fff;
+    color: #1A4263 !important;
+    border-radius: 10px;
+    padding: 0;
+    width: 168px;
+    text-align: center;
+    font-size: 42px ! IMPORTANT;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+
+  .check_box-cpa {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #fff;
+    height: 44px;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+.input-group {
+    position: relative;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 31px;
+    margin-right: 15px !important;
+}   
+
+.switch input {
+    display: none;
+}
+
+.switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: background-color 0.3s ease;
+    border-radius: 24px;
+}
+
+.switch input:checked + .slider {
+    background-color: #1a4265;
+}
+
+.switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 27px;
+    width: 27px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(19px);
+}
+
+.cpa {
+    padding-left: 15px;
+}
+
+.store-menu_item {
+    color: #8e8e92;
+    padding-bottom: 10px;
+    position: relative;
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.052px;
+}
+  

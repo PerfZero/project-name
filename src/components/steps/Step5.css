@@ -1,0 +1,86 @@
+.container-order {
+    background-color: #ffffff;
+    padding-bottom: 0;
+    border-radius: 0;
+}
+
+.order.store-header {
+    display: flex;
+    padding: 20px 0 0 20px;
+    border-bottom: none;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.add-item-title {
+    color: #0e2539;
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: Inter;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+}
+
+.order-contents {
+    background-color: #efeff3;
+    padding: 16px;
+}
+
+.activ {
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18.864px;
+    letter-spacing: -0.052px;
+    font-family: "SF Pro Display", sans-serif;
+}
+
+.activ::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: 0;
+    border-radius: 5px 5px 0 0;
+    background-color: #d53e76;
+}
+
+.photo-upload-group{
+    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+input[type] {
+    background: #fff;
+}
+
+.store-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 26px;
+    margin-top: 25px;
+}
+
+.item-menu-order {
+    padding: 0 16px 16px 16px !important;
+}
+
+.order-contents {
+    background-color: #efeff3;
+    padding: 16px;
+}
+
+.add-item-cont {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}

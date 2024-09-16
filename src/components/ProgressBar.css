@@ -1,0 +1,20 @@
+.status-header__shop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.bar {
+    width: 100%;
+    height: 5px;
+    background: rgba(26, 66, 101, 0.2);
+    border-radius: 10px;
+}
+
+.active-bar {
+    width: 100%;
+    height: 5px;
+    background-color: #1a4265;
+    border-radius: 10px;
+}

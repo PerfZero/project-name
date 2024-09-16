@@ -23,9 +23,6 @@ const Screen1 = () => {
       <Stories/>
       <Content/>
       <Faq/>
-
-
-     
     </div>
   );
 };

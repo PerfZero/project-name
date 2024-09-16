@@ -1,0 +1,151 @@
+.type__block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.input__block {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.input__block label {
+    display: flex;
+    border-bottom: 1px solid #dbdbdb;
+    border-radius: 0;
+    margin-left: 20px;
+    padding: 11px 9px 11px 0;
+    margin-left: 56px;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    color: #000;
+    position: relative; 
+}
+
+input[type] {
+    color: #000;
+}
+
+input[type="radio"] {
+    appearance: none;
+    -ms-transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    transform: scale(0.9);
+    padding: 10px 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #c7c7cc;
+    border-radius: 50%;
+    margin-right: 15px;
+    outline: none;
+    position: absolute;
+    left: -43px;
+}
+
+.input__block label:last-child {
+    border-bottom: 0;
+    color: #c7c7cc;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.input-group > label {
+    font-size: 15px;
+    color: #6d7882;
+    padding: 0 0 0 0;
+    margin: 0;
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+}
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.select-selected {
+    background-color: #fff;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.gray {
+    color: #7a7a7a;
+}
+
+.select-items div:last-child {
+    border-bottom: 0;
+}   
+
+.select-items div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.select-items {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    z-index: 99;
+    max-height: 150px;
+    overflow-y: auto;
+    border-radius: 10px;
+    border: 1px solid #dbdbdb;
+    box-shadow: 5px 6px 19px 0px rgba(0, 0, 0, 0.14);
+}
+
+.select-hide {
+    display: none;
+}
+
+label, select, textarea, input {
+    font-family: "SF Pro Display", sans-serif;
+    font-weight: 400;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 17px;
+    color: #7a7a7a;
+}
+
+input[type="radio"]::before {
+    content: url(./done.svg);
+    display: flex;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #1a4265;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="radio"]:checked::before {
+    opacity: 1;
+    border: 6px solid #fff;
+}   

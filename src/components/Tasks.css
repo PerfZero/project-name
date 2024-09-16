@@ -32,6 +32,15 @@
     padding: 10px 16px 0 16px;
 }
 
+.store-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 26px;
+    margin-top: 25px;
+}   
+
+
+
 
 .dropdown-content {
     position: fixed;

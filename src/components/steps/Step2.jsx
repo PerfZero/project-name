@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar'; // Убедитесь, что путь к компоненту правильный
 import './Step2.css'; // Убедитесь, что у вас есть стили для этого компонента
@@ -30,6 +30,17 @@ const Step2 = ({ formData, setFormData }) => {
   const handleNext = () => {
     navigate('/create-store/step3'); // Используем navigate для перехода
   };
+
+  useEffect(() => {
+    // Убедитесь, что кнопка "Назад" в Telegram Web App настроена правильно
+    if (window.Telegram && window.Telegram.WebApp) {
+      const { BackButton } = window.Telegram.WebApp;
+      BackButton.show();
+      BackButton.onClick(() => {
+        navigate(-1); // Переход на предыдущую страницу
+      });
+    }
+  }, [navigate]);
 
   return (
     <div className="container create-shop">

@@ -51,13 +51,47 @@ const CreateStore = ({ setShowFooter }) => {
 
       // Обработка нажатия кнопки "Назад"
       backButton.onClick(() => {
-        navigate(-1); // Возврат на предыдущий шаг
+        const currentStep = location.pathname.split('/').pop();
+        switch (currentStep) {
+          case 'step2':
+            navigate('/create-store/step1');
+            break;
+          case 'step3':
+            navigate('/create-store/step2');
+            break;
+          case 'step4':
+            navigate('/create-store/step3');
+            break;
+          case 'step5':
+            navigate('/create-store/step4');
+            break;
+          default:
+            navigate('/create-store/step1');
+            break;
+        }
       });
 
       // Очистка при размонтировании компонента
       return () => {
         backButton.offClick(() => {
-          navigate(-1);
+          const currentStep = location.pathname.split('/').pop();
+          switch (currentStep) {
+            case 'step2':
+              navigate('/create-store/step1');
+              break;
+            case 'step3':
+              navigate('/create-store/step2');
+              break;
+            case 'step4':
+              navigate('/create-store/step3');
+              break;
+            case 'step5':
+              navigate('/create-store/step4');
+              break;
+            default:
+              navigate('/create-store/step1');
+              break;
+          }
         });
         backButton.hide();
       };

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import Step1 from './steps/Step1';
 import Step2 from './steps/Step2';
 import Step3 from './steps/Step3';
@@ -26,6 +26,7 @@ const CreateStore = ({ setShowFooter }) => {
   });
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Скрыть футер при загрузке компонента CreateStore
@@ -35,6 +36,33 @@ const CreateStore = ({ setShowFooter }) => {
       setShowFooter(true);
     };
   }, [setShowFooter]);
+
+  useEffect(() => {
+    // Инициализация кнопки "Назад"
+    if (window.Telegram && window.Telegram.WebApp) {
+      const backButton = window.Telegram.WebApp.BackButton;
+
+      // Показать кнопку "Назад", если текущий маршрут не является первым шагом
+      if (location.pathname !== '/create-store/step1') {
+        backButton.show();
+      } else {
+        backButton.hide();
+      }
+
+      // Обработка нажатия кнопки "Назад"
+      backButton.onClick(() => {
+        navigate(-1); // Возврат на предыдущий шаг
+      });
+
+      // Очистка при размонтировании компонента
+      return () => {
+        backButton.offClick(() => {
+          navigate(-1);
+        });
+        backButton.hide();
+      };
+    }
+  }, [location.pathname, navigate]);
 
   return (
     <div>

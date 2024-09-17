@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import Step1 from './steps/Step1';
 import Step2 from './steps/Step2';
 import Step3 from './steps/Step3';
@@ -26,6 +26,7 @@ const CreateStore = ({ setShowFooter }) => {
   });
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Скрыть футер при загрузке компонента CreateStore
@@ -45,17 +46,31 @@ const CreateStore = ({ setShowFooter }) => {
 
     // Установить обработчик нажатия на кнопку "назад"
     backButton.onClick(() => {
-      navigate(-1); // Вернуться на предыдущий шаг
+      const currentPath = location.pathname;
+      const stepNumber = parseInt(currentPath.split('/').pop().replace('step', ''), 10);
+
+      if (stepNumber > 1) {
+        navigate(`/step${stepNumber - 1}`);
+      } else {
+        navigate('/'); // Вернуться на главную, если это первый шаг
+      }
     });
 
     // Очистка обработчика при размонтировании компонента
     return () => {
       backButton.offClick(() => {
-        navigate(-1);
+        const currentPath = location.pathname;
+        const stepNumber = parseInt(currentPath.split('/').pop().replace('step', ''), 10);
+
+        if (stepNumber > 1) {
+          navigate(`/step${stepNumber - 1}`);
+        } else {
+          navigate('/'); // Вернуться на главную, если это первый шаг
+        }
       });
       backButton.hide();
     };
-  }, [navigate]);
+  }, [location, navigate]);
 
   return (
     <div>

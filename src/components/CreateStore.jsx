@@ -46,31 +46,17 @@ const CreateStore = ({ setShowFooter }) => {
 
     // Установить обработчик нажатия на кнопку "назад"
     backButton.onClick(() => {
-      const currentPath = location.pathname;
-      const stepNumber = parseInt(currentPath.split('/').pop().replace('step', ''), 10);
-
-      if (stepNumber > 1) {
-        navigate(`/create-store/step${stepNumber - 1}`);
-      } else {
-        navigate('/'); // Вернуться на главную, если это первый шаг
-      }
+      navigate(-1); // Вернуться на предыдущий шаг
     });
 
     // Очистка обработчика при размонтировании компонента
     return () => {
       backButton.offClick(() => {
-        const currentPath = location.pathname;
-        const stepNumber = parseInt(currentPath.split('/').pop().replace('step', ''), 10);
-
-        if (stepNumber > 1) {
-          navigate(`/create-store/step${stepNumber - 1}`);
-        } else {
-          navigate('/'); // Вернуться на главную, если это первый шаг
-        }
+        navigate(-1); // Вернуться на предыдущий шаг
       });
       backButton.hide();
     };
-  }, [location, navigate]);
+  }, [navigate]);
 
   return (
     <div>

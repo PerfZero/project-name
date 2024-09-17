@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import personalIcon from '../assets/user.svg';
 import businessIcon from '../assets/briefcase.svg';
@@ -20,12 +20,31 @@ const Step1 = ({ formData, setFormData }) => {
     }
   };
 
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const webApp = window.Telegram.WebApp;
+
+      // Show the back button
+      webApp.BackButton.show();
+
+      // Set the back button click handler
+      webApp.BackButton.onClick(() => {
+        navigate('/');
+      });
+
+      // Cleanup on component unmount
+      return () => {
+        webApp.BackButton.offClick(() => {
+          navigate('/');
+        });
+        webApp.BackButton.hide();
+      };
+    }
+  }, [navigate]);
+
   return (
     <div className="container create-shop">
       <div className="header__create-shop">
-        <a href="/"> 
-          <p className="back">Back</p>
-        </a>
         <h1 className="title-create__shop">Create your store</h1>
         <p className="sub-title_details">Shop details</p>
         <ProgressBar currentStep={1} />

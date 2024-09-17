@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Step1 from './steps/Step1';
 import Step2 from './steps/Step2';
 import Step3 from './steps/Step3';
 import Step4 from './steps/Step4';
-import Step5 from './steps/Step5';
+import Step5 from './steps/Step5'; // Импортируйте новый компонент Step5
 
 const CreateStore = ({ setShowFooter }) => {
   const [formData, setFormData] = React.useState({
@@ -26,37 +26,15 @@ const CreateStore = ({ setShowFooter }) => {
   });
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     // Скрыть футер при загрузке компонента CreateStore
     setShowFooter(false);
     return () => {
       // Показать футер при уходе с компонента CreateStore
-      setShowFooter(true);
+      setShowFooter(true);  
     };
   }, [setShowFooter]);
-
-  useEffect(() => {
-    // Инициализация кнопки "назад"
-    const backButton = window.Telegram.WebApp.BackButton;
-
-    // Показать кнопку "назад"
-    backButton.show();
-
-    // Установить обработчик нажатия на кнопку "назад"
-    backButton.onClick(() => {
-      navigate(-1); // Вернуться на предыдущий шаг
-    });
-
-    // Очистка обработчика при размонтировании компонента
-    return () => {
-      backButton.offClick(() => {
-        navigate(-1); // Вернуться на предыдущий шаг
-      });
-      backButton.hide();
-    };
-  }, [navigate]);
 
   return (
     <div>
@@ -65,7 +43,7 @@ const CreateStore = ({ setShowFooter }) => {
         <Route path="step2" element={<Step2 formData={formData} setFormData={setFormData} />} />
         <Route path="step3" element={<Step3 formData={formData} setFormData={setFormData} />} />
         <Route path="step4" element={<Step4 formData={formData} setFormData={setFormData} />} />
-        <Route path="step5" element={<Step5 formData={formData} setFormData={setFormData} />} />
+        <Route path="step5" element={<Step5 formData={formData} setFormData={setFormData} />} /> {/* Новый маршрут для Step5 */}
       </Routes>
     </div>
   );

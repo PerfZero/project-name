@@ -19,7 +19,6 @@ const Screen1 = () => {
 
   return (
     <div className="screen1-page">
-      <Header onThemeToggle={handleThemeToggle} />
       <Stories/>
       <Content/>
       <Faq/>

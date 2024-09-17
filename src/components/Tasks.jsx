@@ -47,7 +47,6 @@ const Tasks = () => {
 
   return (
     <div className={`tasks-page ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
-      <Header onThemeToggle={handleThemeToggle} />
       <Stories />
       
       <div className="your-stores">

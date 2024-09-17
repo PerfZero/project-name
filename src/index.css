@@ -26,7 +26,7 @@ body {
   font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #efeff3;
+  background-color: var(--tg-theme-bg-color).;
 }
 
 p,
@@ -44,17 +44,6 @@ a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-body.dark-theme {
-  background-color: #121212;
-  color: #ffffff;
-}
-
-body.light-theme {
-  background-color: #efeff3;
-  color: #000000;
-}
-
-
 .settings-content.dark{
   background-color: #121212;
   color: #ffffff;
@@ -63,4 +52,10 @@ body.light-theme {
 .read-faq.dark{
   background-color: #121212;
   color: #ffffff;
+}
+
+.dark-theme{
+  background-color: #101010;
+  height: 100dvh;
+  color: #fff;
 }

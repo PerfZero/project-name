@@ -5,13 +5,13 @@ import { ReactComponent as TasksIcon } from '../icons/tasks.svg';
 import { ReactComponent as MarketplaceIcon } from '../icons/marketplace.svg';
 import './Footer.css'; // Подключите CSS для стилей футера
 
-const Footer = () => {
+const Footer = ({ isDarkTheme }) => {
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
 
   return (
-    <footer >
+    <footer className={`footer ${isDarkTheme ? 'dark' : 'light'}`}>
       <div className="footer-buttons">
         <Link to="/store" className={`footer-button ${isActive('/store') ? 'active' : ''}`}>
           <StoreIcon className="footer-icon" />

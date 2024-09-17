@@ -8,7 +8,13 @@
     align-content: center;
     align-items: center;
     margin-top: 50px;
+    transition: background-color 0.3s, color 0.3s;
+
 }
+
+
+
+
 
 .bucket-img img {
     object-fit: cover;
@@ -27,3 +33,14 @@
     text-transform: none;
     color: #d53e76;
 }
+
+
+.read-faq.dark-theme{
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  .read-faq.light-theme{
+    background-color: #fff;
+    color: #0e2539;
+  }

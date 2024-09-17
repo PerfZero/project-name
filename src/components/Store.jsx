@@ -19,7 +19,7 @@ const Screen1 = () => {
 
   return (
     <div className="screen1-page">
-      <Stories/>
+      <Stories/>  
       <Content/>
       <Faq/>
     </div>

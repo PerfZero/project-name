@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Stories from '../components/Stories/Stories';
 import StoreCard from '../components/StoreCard';
@@ -44,28 +44,6 @@ const Tasks = () => {
     setFilter(filter);
     closeDropdown();
   };
-
-  useEffect(() => {
-    // Получаем объект WebApp из Telegram
-    const webApp = window.Telegram.WebApp;
-
-    // Показываем кнопку "Назад"
-    webApp.BackButton.show();
-
-    // Устанавливаем обработчик нажатия на кнопку "Назад"
-    webApp.BackButton.onClick(() => {
-      // Здесь можно добавить логику, которая будет выполняться при нажатии на кнопку "Назад"
-      console.log('Back button clicked');
-      // Например, можно перенаправить пользователя на предыдущую страницу или выполнить другую логику
-      // webApp.close(); // Закрыть WebApp
-    });
-
-    // Очистка обработчика при размонтировании компонента
-    return () => {
-      webApp.BackButton.offClick();
-      webApp.BackButton.hide();
-    };
-  }, []);
 
   return (
     <div className={`tasks-page ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>

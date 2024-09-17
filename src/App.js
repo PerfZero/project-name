@@ -7,9 +7,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CreateStore from './components/CreateStore';
 
-// Проверяем, доступен ли Telegram WebApp API
-const isTelegramWebAppAvailable = typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp;
-
 const App = () => {
   // Состояние для управления темой (светлая/темная)
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -36,24 +33,16 @@ const App = () => {
       setShowFooter(true);
     }
 
-    // Управление кнопкой "Назад" в Telegram Mini App
-    if (isTelegramWebAppAvailable) {
-      if (window.Telegram.WebApp) {
-        // Показать кнопку "Назад"
-        window.Telegram.WebApp.BackButton.show();
-
-        // Устанавливаем обработчик нажатия кнопки "Назад"
-        window.Telegram.WebApp.BackButton.onClick(() => {
-          // Логика при нажатии кнопки "Назад"
+    // Управление видимостью кнопки "Назад"
+    if (window.Telegram && window.Telegram.WebApp) {
+      const { BackButton } = window.Telegram.WebApp;
+      if (location.pathname === '/') {
+        BackButton.hide();
+      } else {
+        BackButton.show();
+        BackButton.onClick(() => {
           window.history.back();
         });
-
-        // Убираем обработчик при размонтировании компонента
-        return () => {
-          if (window.Telegram.WebApp) {
-            window.Telegram.WebApp.BackButton.offClick();
-          }
-        };
       }
     }
   }, [location.pathname]);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar'; // Убедитесь, что путь к компоненту правильный
 import './Step2.css'; // Убедитесь, что у вас есть стили для этого компонента
@@ -31,12 +31,31 @@ const Step2 = ({ formData, setFormData }) => {
     navigate('/create-store/step3'); // Используем navigate для перехода
   };
 
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const webApp = window.Telegram.WebApp;
+
+      // Show the back button
+      webApp.BackButton.show();
+
+      // Set the back button click handler
+      webApp.BackButton.onClick(() => {
+        navigate('/create-store/step1');
+      });
+
+      // Cleanup on component unmount
+      return () => {
+        webApp.BackButton.offClick(() => {
+          navigate('/create-store/step1');
+        });
+        webApp.BackButton.hide();
+      };
+    }
+  }, [navigate]);
+
   return (
     <div className="container create-shop">
       <div className="header__create-shop">
-        <a href="/create-store/step1">
-          <p className="back">Back</p>
-        </a>
         <h1 className="title-create__shop">Create your store</h1>
         <p className="sub-title_details">Add your bot</p>
         <ProgressBar currentStep={2} /> {/* Добавляем ProgressBar */}

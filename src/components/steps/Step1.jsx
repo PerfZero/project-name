@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import personalIcon from '../assets/user.svg';
 import businessIcon from '../assets/briefcase.svg';
@@ -20,21 +20,10 @@ const Step1 = ({ formData, setFormData }) => {
     }
   };
 
-  useEffect(() => {
-    // Убедитесь, что кнопка "Назад" в Telegram Web App настроена правильно
-    if (window.Telegram && window.Telegram.WebApp) {
-      const { BackButton } = window.Telegram.WebApp;
-      BackButton.show();
-      BackButton.onClick(() => {
-        navigate(-1); // Переход на предыдущую страницу
-      });
-    }
-  }, [navigate]);
-
   return (
     <div className="container create-shop">
       <div className="header__create-shop">
-        <a href="/">
+        <a href="/"> 
           <p className="back">Back</p>
         </a>
         <h1 className="title-create__shop">Create your store</h1>

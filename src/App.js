@@ -32,19 +32,6 @@ const App = () => {
       setShowHeader(true);
       setShowFooter(true);
     }
-
-    // Управление видимостью кнопки "Назад"
-    if (window.Telegram && window.Telegram.WebApp) {
-      const { BackButton } = window.Telegram.WebApp;
-      if (location.pathname === '/store') {
-        BackButton.hide();
-      } else {
-        BackButton.show();
-        BackButton.onClick(() => {
-          window.history.back();
-        });
-      }
-    }
   }, [location.pathname]);
 
   return (

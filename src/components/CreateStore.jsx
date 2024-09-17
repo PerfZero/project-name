@@ -50,7 +50,7 @@ const CreateStore = ({ setShowFooter }) => {
       const stepNumber = parseInt(currentPath.split('/').pop().replace('step', ''), 10);
 
       if (stepNumber > 1) {
-        navigate(`/step${stepNumber - 1}`);
+        navigate(`/create-store/step${stepNumber - 1}`);
       } else {
         navigate('/'); // Вернуться на главную, если это первый шаг
       }
@@ -63,7 +63,7 @@ const CreateStore = ({ setShowFooter }) => {
         const stepNumber = parseInt(currentPath.split('/').pop().replace('step', ''), 10);
 
         if (stepNumber > 1) {
-          navigate(`/step${stepNumber - 1}`);
+          navigate(`/create-store/step${stepNumber - 1}`);
         } else {
           navigate('/'); // Вернуться на главную, если это первый шаг
         }

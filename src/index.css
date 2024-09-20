@@ -14,15 +14,15 @@ code {
 
 
 :root {
-  /* Светлая тема */
-  --tg-theme-bg-color: #efeff3 !important; /* Цвет фона для светлой темы */
+  --tg-theme-bg-color: #fff !important; /* Цвет фона для светлой темы */
   --tg-theme-text-color: #0e2539 !important; /* Цвет текста для светлой темы */
+  --tg-theme-secondary-bg: #f5f5f5 !important; /* Вторичный цвет фона для светлой темы */
 }
 
 .dark-theme {
-  /* Темная тема */
   --tg-theme-bg-color: #1a1a1a; /* Цвет фона для темной темы */
   --tg-theme-text-color: #ffffff; /* Цвет текста для темной темы */
+  --tg-theme-secondary-bg: #333; /* Вторичный цвет фона для темной темы */
 }
 
 

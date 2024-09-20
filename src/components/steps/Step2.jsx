@@ -1,49 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProgressBar from '../ProgressBar'; // Убедитесь, что путь к компоненту правильный
-import './Step2.css'; // Убедитесь, что у вас есть стили для этого компонента
+import ProgressBar from '../ProgressBar';
+import './Step2.css';
 
 const Step2 = ({ formData, setFormData }) => {
   const [selectedStoreType, setSelectedStoreType] = useState(formData.storeType || '');
   const [selectedTheme, setSelectedTheme] = useState(formData.theme || '');
   const [channelLink, setChannelLink] = useState(formData.channelLink || '');
   const [botAPI, setBotAPI] = useState(formData.botAPI || '');
-  const [isSelectOpen, setIsSelectOpen] = useState(false); // Добавлено состояние для управления видимостью
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
 
-  const navigate = useNavigate(); // Используем useNavigate хук
+  const navigate = useNavigate();
+
+  // Загрузка данных из localStorage при монтировании компонента
+  useEffect(() => {
+    const savedFormData = JSON.parse(localStorage.getItem('formData'));
+    if (savedFormData) {
+      setSelectedStoreType(savedFormData.storeType || '');
+      setSelectedTheme(savedFormData.theme || '');
+      setChannelLink(savedFormData.channelLink || '');
+      setBotAPI(savedFormData.botAPI || '');
+      setFormData(savedFormData);
+    }
+  }, [setFormData]);
 
   const handleStoreTypeChange = (e) => {
+    const updatedFormData = { ...formData, storeType: e.target.value };
     setSelectedStoreType(e.target.value);
-    setFormData({ ...formData, storeType: e.target.value });
+    setFormData(updatedFormData);
+    localStorage.setItem('formData', JSON.stringify(updatedFormData));
   };
 
   const handleThemeChange = (e) => {
+    const updatedFormData = { ...formData, theme: e.target.textContent };
     setSelectedTheme(e.target.textContent);
-    setFormData({ ...formData, theme: e.target.textContent });
-    setIsSelectOpen(false); // Закрываем селект после выбора
+    setFormData(updatedFormData);
+    localStorage.setItem('formData', JSON.stringify(updatedFormData));
+    setIsSelectOpen(false);
   };
 
   const handleSelectToggle = () => {
-    setIsSelectOpen(!isSelectOpen); // Переключаем видимость селекта
+    setIsSelectOpen(!isSelectOpen);
   };
 
   const handleNext = () => {
-    navigate('/create-store/step3'); // Используем navigate для перехода
+    navigate('/create-store/step3');
   };
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       const webApp = window.Telegram.WebApp;
 
-      // Show the back button
       webApp.BackButton.show();
-
-      // Set the back button click handler
       webApp.BackButton.onClick(() => {
         navigate('/create-store/step1');
       });
 
-      // Cleanup on component unmount
       return () => {
         webApp.BackButton.offClick(() => {
           navigate('/create-store/step1');
@@ -58,7 +70,7 @@ const Step2 = ({ formData, setFormData }) => {
       <div className="header__create-shop">
         <h1 className="title-create__shop">Create your store</h1>
         <p className="sub-title_details">Add your bot</p>
-        <ProgressBar currentStep={2} /> {/* Добавляем ProgressBar */}
+        <ProgressBar currentStep={2} />
       </div>
 
       <div className="choose_type">
@@ -117,8 +129,10 @@ const Step2 = ({ formData, setFormData }) => {
                 placeholder="https://t.me/toyseller"
                 value={channelLink}
                 onChange={(e) => {
+                  const updatedFormData = { ...formData, channelLink: e.target.value };
                   setChannelLink(e.target.value);
-                  setFormData({ ...formData, channelLink: e.target.value });
+                  setFormData(updatedFormData);
+                  localStorage.setItem('formData', JSON.stringify(updatedFormData));
                 }}
               />
             </div>
@@ -130,8 +144,10 @@ const Step2 = ({ formData, setFormData }) => {
                 placeholder="mnjDN_22nDU-WEJKCX..."
                 value={botAPI}
                 onChange={(e) => {
+                  const updatedFormData = { ...formData, botAPI: e.target.value };
                   setBotAPI(e.target.value);
-                  setFormData({ ...formData, botAPI: e.target.value });
+                  setFormData(updatedFormData);
+                  localStorage.setItem('formData', JSON.stringify(updatedFormData));
                 }}
               />
             </div>
@@ -144,7 +160,7 @@ const Step2 = ({ formData, setFormData }) => {
           <button
             className="btn btn-catalog"
             onClick={handleNext}
-            disabled={!selectedStoreType || !selectedTheme}
+            disabled={!selectedStoreType || !selectedTheme || !channelLink || !botAPI}
           >
             Next
           </button>

@@ -9,9 +9,20 @@ const Step1 = ({ formData, setFormData }) => {
   const [selectedType, setSelectedType] = useState(formData?.userType || '');
   const navigate = useNavigate();
 
+  // Загрузка данных из localStorage при первом рендере
+  useEffect(() => {
+    const savedFormData = JSON.parse(localStorage.getItem('formData'));
+    if (savedFormData && savedFormData.userType) {
+      setSelectedType(savedFormData.userType);
+      setFormData(savedFormData);
+    }
+  }, [setFormData]);
+
   const handleSelect = (type) => {
+    const updatedFormData = { ...formData, userType: type };
     setSelectedType(type);
-    setFormData({ ...formData, userType: type });
+    setFormData(updatedFormData);
+    localStorage.setItem('formData', JSON.stringify(updatedFormData)); // Сохраняем данные в localStorage
   };
 
   const handleNext = () => {
@@ -20,19 +31,20 @@ const Step1 = ({ formData, setFormData }) => {
     }
   };
 
+  // Логика кнопки "Назад" для Telegram WebApp
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       const webApp = window.Telegram.WebApp;
 
-      // Show the back button
+      // Показываем кнопку назад
       webApp.BackButton.show();
 
-      // Set the back button click handler
+      // Обработчик нажатия на кнопку "Назад"
       webApp.BackButton.onClick(() => {
         navigate('/');
       });
 
-      // Cleanup on component unmount
+      // Очистка обработчика при размонтировании компонента
       return () => {
         webApp.BackButton.offClick(() => {
           navigate('/');

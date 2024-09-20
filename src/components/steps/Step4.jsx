@@ -10,32 +10,62 @@ const Step4 = ({ formData, setFormData }) => {
   const [email, setEmail] = useState(formData.email || '');
   const [phone, setPhone] = useState(formData.phone || '');
   const [address, setAddress] = useState(formData.address || '');
-  const [isSelectOpen, setIsSelectOpen] = useState(null);
 
+  const [isSelectOpen, setIsSelectOpen] = useState(null);
   const navigate = useNavigate();
 
+  // Загрузка данных из localStorage при первом рендере
+  useEffect(() => {
+    const savedFormData = JSON.parse(localStorage.getItem('formData'));
+    if (savedFormData) {
+      setFormData(savedFormData);
+      setCurrency(savedFormData.currency || 'USD');
+      setPaymentMethods(savedFormData.paymentMethods || 'Crypto, Bank cards');
+      setDeliveryMethods(savedFormData.deliveryMethods || 'FeedEx');
+      setEmail(savedFormData.email || '');
+      setPhone(savedFormData.phone || '');
+      setAddress(savedFormData.address || '');
+    }
+  }, [setFormData]);
+
   const handleSelectChange = (type, value) => {
+    const updatedFormData = { ...formData, [type]: value };
+    setFormData(updatedFormData);
+    localStorage.setItem('formData', JSON.stringify(updatedFormData)); // Сохраняем данные в localStorage
     switch (type) {
       case 'currency':
         setCurrency(value);
-        setFormData({ ...formData, currency: value });
         break;
       case 'payment':
         setPaymentMethods(value);
-        setFormData({ ...formData, paymentMethods: value });
         break;
       case 'delivery':
         setDeliveryMethods(value);
-        setFormData({ ...formData, deliveryMethods: value });
         break;
       default:
         break;
     }
-    setIsSelectOpen(null); // Закрываем селект после выбора
+    setIsSelectOpen(null);
   };
 
-  const handleSelectToggle = (type) => {
-    setIsSelectOpen(isSelectOpen === type ? null : type); // Переключаем видимость селекта
+  const handleInputChange = (e, field) => {
+    const updatedFormData = { ...formData, [field]: e.target.value };
+    setFormData(updatedFormData);
+    localStorage.setItem('formData', JSON.stringify(updatedFormData)); // Сохраняем данные в localStorage
+
+    switch (field) {
+      case 'email':
+        setEmail(e.target.value);
+        break;
+      case 'phone':
+        setPhone(e.target.value);
+        break;
+      case 'address':
+        setAddress(e.target.value);
+        break;
+      default:
+        break;
+    }
   };
 
   const handleNext = () => {
@@ -43,20 +73,16 @@ const Step4 = ({ formData, setFormData }) => {
     navigate('/create-store/step5');
   };
 
-  // Логика для отображения кнопки BackButton
+  // Логика кнопки BackButton
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       const webApp = window.Telegram.WebApp;
-
-      // Показываем кнопку назад
       webApp.BackButton.show();
 
-      // Устанавливаем обработчик клика для перехода на предыдущий шаг
       webApp.BackButton.onClick(() => {
         navigate('/create-store/step3');
       });
 
-      // Очищаем обработчики и скрываем кнопку при размонтировании
       return () => {
         webApp.BackButton.offClick(() => {
           navigate('/create-store/step3');
@@ -78,7 +104,7 @@ const Step4 = ({ formData, setFormData }) => {
         <div className="container type-of">
           <div className="input-group">
             <label htmlFor="currency">Currency</label>
-            <div className="custom-select" id="currency" onClick={() => handleSelectToggle('currency')}>
+            <div className="custom-select" id="currency" onClick={() => setIsSelectOpen('currency')}>
               <div className="select-selected">{currency}</div>
               <div className={`select-items ${isSelectOpen === 'currency' ? '' : 'select-hide'}`}>
                 <div onClick={() => handleSelectChange('currency', 'USD')}>USD</div>
@@ -91,7 +117,7 @@ const Step4 = ({ formData, setFormData }) => {
 
           <div className="input-group">
             <label htmlFor="payment-methods">Payments</label>
-            <div className="custom-select" id="payment-methods" onClick={() => handleSelectToggle('payment')}>
+            <div className="custom-select" id="payment-methods" onClick={() => setIsSelectOpen('payment')}>
               <div className="select-selected">{paymentMethods}</div>
               <div className={`select-items ${isSelectOpen === 'payment' ? '' : 'select-hide'}`}>
                 <div onClick={() => handleSelectChange('payment', 'Crypto, Bank cards')}>Crypto, Bank cards</div>
@@ -104,7 +130,7 @@ const Step4 = ({ formData, setFormData }) => {
 
           <div className="input-group">
             <label htmlFor="delivery-methods">Delivery</label>
-            <div className="custom-select" id="delivery-methods" onClick={() => handleSelectToggle('delivery')}>
+            <div className="custom-select" id="delivery-methods" onClick={() => setIsSelectOpen('delivery')}>
               <div className="select-selected">{deliveryMethods}</div>
               <div className={`select-items ${isSelectOpen === 'delivery' ? '' : 'select-hide'}`}>
                 <div onClick={() => handleSelectChange('delivery', 'FeedEx')}>FeedEx</div>
@@ -122,10 +148,7 @@ const Step4 = ({ formData, setFormData }) => {
               id="email"
               placeholder="Enter email address"
               value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setFormData({ ...formData, email: e.target.value });
-              }}
+              onChange={(e) => handleInputChange(e, 'email')}
             />
           </div>
 
@@ -136,10 +159,7 @@ const Step4 = ({ formData, setFormData }) => {
               id="phone"
               placeholder="Enter phone number"
               value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-                setFormData({ ...formData, phone: e.target.value });
-              }}
+              onChange={(e) => handleInputChange(e, 'phone')}
             />
           </div>
 
@@ -149,10 +169,7 @@ const Step4 = ({ formData, setFormData }) => {
               id="address"
               placeholder="Enter address"
               value={address}
-              onChange={(e) => {
-                setAddress(e.target.value);
-                setFormData({ ...formData, address: e.target.value });
-              }}
+              onChange={(e) => handleInputChange(e, 'address')}
             />
           </div>
         </div>

@@ -16,6 +16,28 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
+    const checkTheme = () => {
+      const theme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setIsDarkTheme(theme);
+    };
+
+    checkTheme(); // Проверяем начальную тему
+
+    // Слушаем изменения темы
+    const themeChangeListener = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleThemeChange = (event) => {
+      setIsDarkTheme(event.matches);
+    };
+    
+    themeChangeListener.addEventListener('change', handleThemeChange);
+
+    // Убираем слушатель при размонтировании
+    return () => {
+      themeChangeListener.removeEventListener('change', handleThemeChange);
+    };
+  }, []);
+
+  useEffect(() => {
     if (location.pathname.startsWith('/create-store') || location.pathname.startsWith('/store/1/')) {
       setShowHeader(false);
       setShowFooter(false);
@@ -27,28 +49,16 @@ const App = () => {
 
   return (
     <div className={isDarkTheme ? 'dark-theme' : 'light-theme'}>
-      {showHeader && (
-        <Header
-          onThemeToggle={setIsDarkTheme}
-          isDarkTheme={isDarkTheme}
-        />
-      )}
-
-      {/* Telegram Back Button */}
-      <TelegramBackButton /> 
-
+      {showHeader && <Header />}
+      <TelegramBackButton />
       <Routes>
         <Route path="/" element={<Navigate to="/store" />} />
         <Route path="/store" element={<Store />} />
         <Route path="/tasks" element={<Tasks />} />
-        <Route
-          path="/create-store/*"
-          element={<CreateStore setShowHeader={setShowHeader} setShowFooter={setShowFooter} />}
-        />
+        <Route path="/create-store/*" element={<CreateStore setShowHeader={setShowHeader} setShowFooter={setShowFooter} />} />
         <Route path="/store/:storeId/*" element={<StoreDetails />} />
       </Routes>
-
-      {showFooter && <Footer isDarkTheme={isDarkTheme} />}
+      {showFooter && <Footer />}
     </div>
   );
 };

@@ -39,6 +39,17 @@
 
   }
 
+  .arrow-down {
+    content: url(./img/arrow-rgth.svg);
+}
+
+.input-group .arrow-down {
+  position: absolute;
+  right: 20px;
+  top: 16px;
+  transform: rotate(90deg);
+}
+
   .filter-popup .filter-item:last-child {
     border-bottom: none !important;
 }

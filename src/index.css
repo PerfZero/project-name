@@ -13,11 +13,18 @@ code {
 }
 
 
-
 :root {
-  --tg-theme-bg-color: #efeff3; /* Ваш цвет фона */
-  --tg-theme-text-color: #0e2539; /* Ваш цвет текста */
+  /* Светлая тема */
+  --tg-theme-bg-color: #efeff3; /* Цвет фона для светлой темы */
+  --tg-theme-text-color: #0e2539; /* Цвет текста для светлой темы */
 }
+
+.dark-theme {
+  /* Темная тема */
+  --tg-theme-bg-color: #1a1a1a; /* Цвет фона для темной темы */
+  --tg-theme-text-color: #ffffff; /* Цвет текста для темной темы */
+}
+
 
 html {
   scroll-behavior: smooth;

@@ -23,10 +23,10 @@ code {
 }
 
 .dark-theme {
-  --tg-theme-bg-color: #23232D; /* Цвет фона для темной темы */
-  --tg-theme-text-color: #ffffff; /* Цвет текста для темной темы */
+  --tg-theme-bg-color: #23232D !important; /* Цвет фона для темной темы */
+  --tg-theme-text-color: #ffffff !important; /* Цвет текста для темной темы */
   --tg-theme-secondary-bg: #17181C; /* Вторичный цвет фона для темной темы */
-  --tg-theme-icon: #fff !important; /* Вторичный цвет фона для светлой темы */
+  --tg-theme-icon: #fff !important; /* Втор`ичный цвет фона для светлой темы */
   --tg-theme-icon-activity: #d53e76;
   --tg-theme-bg-def: #17181C  !important; /* Цвет фона для светлой темы */
 }

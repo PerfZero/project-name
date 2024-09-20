@@ -1,5 +1,5 @@
 .container-order {
-    background-color: #ffffff;
+    background-color: var(--tg-theme-three-bg);
     padding-bottom: 0;
     border-radius: 0;
 }
@@ -12,11 +12,11 @@
     align-items: flex-start;
     margin-bottom: 0;
     justify-content: space-between;
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);;
 }
 
 .add-item-title {
-    color: #0e2539;
+    color: var( --tg-theme-text-color);
     font-feature-settings: "clig" off, "liga" off;
     font-family: Inter;
     font-size: 17px;
@@ -26,12 +26,13 @@
 }
 
 .order-contents {
-    background-color: #efeff3;
+    background-color: var(--tg-theme-bg-def);
     padding: 16px;
+    font-family: inherit;
 }
 
 .activ {
-    color: #000;
+    color: var(--tg-theme-three-text);
     font-size: 14px;
     font-weight: 500;
     font-size: 14px;
@@ -60,8 +61,12 @@
 }
 
 
+.add-item-menu{
+    background: var(--tg-theme-bg-def);
+}
+
 input[type] {
-    background: #fff;
+    background: var(--tg-theme-bg-def);
 }
 
 .store-menu {
@@ -76,7 +81,7 @@ input[type] {
 }
 
 .order-contents {
-    background-color: #efeff3;
+    background-color: var(--tg-theme-three-bg);
     padding: 16px;
 }
 

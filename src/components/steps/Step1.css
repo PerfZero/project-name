@@ -26,21 +26,21 @@
 }
 
 .choose_block-item {
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);
     border-radius: 10px;
     padding: 31px 0;
     text-align: center;
     width: 100%;
-    border: 1px solid #fff;
+    border: 1px solid var(--tg-theme-bg-def);
 }
 
 .choose_block-item {
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);
     border-radius: 10px;
     padding: 31px 0;
     text-align: center;
     width: 100%;
-    border: 1px solid #fff;
+    border: 1px solid var(--tg-theme-bg-def);
 }
 
 .choose_block-title {
@@ -77,7 +77,7 @@
     margin: 0;
     font-size: 22px;
     font-weight: bold;
-    color: #0e2539;
+    color: var(--tg-theme-text-color);
     margin-bottom: 5px;
 }
 
@@ -95,8 +95,7 @@
 .container {
     width: 100%;
     margin: auto;
-    background-color: #efeff3;
-    border-radius: 10px;
+    background-color: var(--tg-theme-three-bg);
     padding-bottom: 120px;
     display: flex;
     flex-direction: column;
@@ -105,7 +104,7 @@
 .add-item_btn {
     border-top: 0;
     position: relative;
-    background: #efeff3;
+    background: var(--tg-theme-three-bg);
     padding: 0 0 20px 0;
     padding-top: 25px;
 }

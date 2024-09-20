@@ -6,6 +6,12 @@
 }
 textarea {
     height: 75px;
+    background-color: var(--tg-theme-bg-def);
+    color: var(--tg-theme-text-color);
+}
+
+textarea[type="text"] {
+   color: var(--tg-theme-text-color);
 }
 
 
@@ -35,7 +41,7 @@ textarea {
     font-weight: 100 !important;
     cursor: pointer;
     display: inline-block;
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);
     color: #1A4263 !important;
     border-radius: 10px;
     padding: 0;
@@ -54,7 +60,8 @@ textarea {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);
+    color: var(--tg-theme-text-color);
     height: 44px;
     border-radius: 10px;
     justify-content: space-between;

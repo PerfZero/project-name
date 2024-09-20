@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar';
 import './Step3.css';
@@ -12,7 +12,6 @@ const Step3 = ({ formData, setFormData }) => {
   const [fileKey, setFileKey] = useState(Date.now());
 
   const fileInputRef = useRef(null);
-
   const navigate = useNavigate();
 
   const handleLanguageChange = (e) => {
@@ -50,35 +49,12 @@ const Step3 = ({ formData, setFormData }) => {
     navigate('/create-store/step4');
   };
 
-  // Добавляем BackButton с логикой для шага 2
-  useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const webApp = window.Telegram.WebApp;
-
-      // Показываем кнопку назад
-      webApp.BackButton.show();
-
-      // Устанавливаем обработчик клика на кнопку назад
-      webApp.BackButton.onClick(() => {
-        navigate('/create-store/step2');
-      });
-
-      // Убираем обработчики при размонтировании компонента
-      return () => {
-        webApp.BackButton.offClick(() => {
-          navigate('/create-store/step2');
-        });
-        webApp.BackButton.hide();
-      };
-    }
-  }, [navigate]);
-
   return (
     <div className="container create-shop">
       <div className="header__create-shop">
         <h1 className="title-create__shop">Create your store</h1>
         <p className="sub-title_details">Store details</p>
-        <ProgressBar currentStep={3} /> {/* Добавляем ProgressBar */}
+        <ProgressBar currentStep={3} />
       </div>
 
       <div className="choose_type">

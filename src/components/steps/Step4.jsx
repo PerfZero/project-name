@@ -31,7 +31,7 @@ const Step4 = ({ formData, setFormData }) => {
   const handleSelectChange = (type, value) => {
     const updatedFormData = { ...formData, [type]: value };
     setFormData(updatedFormData);
-    localStorage.setItem('formData', JSON.stringify(updatedFormData)); // Сохраняем данные в localStorage
+    localStorage.setItem('formData', JSON.stringify(updatedFormData));
     switch (type) {
       case 'currency':
         setCurrency(value);
@@ -51,7 +51,7 @@ const Step4 = ({ formData, setFormData }) => {
   const handleInputChange = (e, field) => {
     const updatedFormData = { ...formData, [field]: e.target.value };
     setFormData(updatedFormData);
-    localStorage.setItem('formData', JSON.stringify(updatedFormData)); // Сохраняем данные в localStorage
+    localStorage.setItem('formData', JSON.stringify(updatedFormData));
 
     switch (field) {
       case 'email':
@@ -72,25 +72,6 @@ const Step4 = ({ formData, setFormData }) => {
     console.log('Shop created with the following data:', formData);
     navigate('/create-store/step5');
   };
-
-  // Логика кнопки BackButton
-  useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const webApp = window.Telegram.WebApp;
-      webApp.BackButton.show();
-
-      webApp.BackButton.onClick(() => {
-        navigate('/create-store/step3');
-      });
-
-      return () => {
-        webApp.BackButton.offClick(() => {
-          navigate('/create-store/step3');
-        });
-        webApp.BackButton.hide();
-      };
-    }
-  }, [navigate]);
 
   return (
     <div className="container create-shop">

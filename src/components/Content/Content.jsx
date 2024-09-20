@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Импортируем Link
+import { Link } from 'react-router-dom';
 import './Content.css';
 import moneyImage from './money.png'; // Убедитесь, что путь к изображению корректен
 
 const Content = () => {
+  const handleCreateStoreClick = () => {
+    localStorage.removeItem('formData'); // Очищаем данные из localStorage
+  };
+
   return (
     <div className="content">
       <img src={moneyImage} alt="Flying money" />
@@ -15,8 +19,8 @@ const Content = () => {
         SPRUTON definitely simplest and useful <br />
         platform for e-commerce.
       </div>
-      {/* Используем Link вместо a для перехода по маршруту */}
-      <Link to="/create-store/step1" className="btn create-store main-btn">
+      {/* Используем Link с onClick для очищения localStorage */}
+      <Link to="/create-store/step1" className="btn create-store main-btn" onClick={handleCreateStoreClick}>
         Create store
       </Link>
     </div>

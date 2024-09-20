@@ -6,38 +6,42 @@ import StoreDetails from './components/StoreDetails';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CreateStore from './components/CreateStore';
-import TelegramBackButton from './components/TelegramBackButton'; // Импортируем компонент
+import TelegramBackButton from './components/TelegramBackButton';
 
 const App = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [showFooter, setShowFooter] = useState(true);
-
+  
   const location = useLocation();
 
   useEffect(() => {
-    const updateTheme = () => {
-      const theme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setIsDarkTheme(theme);
-      
-      if (theme) {
-        document.body.classList.add('dark-theme');
-        document.body.classList.remove('light-theme');
-      } else {
-        document.body.classList.add('light-theme');
-        document.body.classList.remove('dark-theme');
-      }
-    };
-  
-    updateTheme(); // Проверяем начальную тему
-  
+    const savedTheme = localStorage.getItem('isDarkTheme') === 'true';
+    setIsDarkTheme(savedTheme);
+    updateTheme(savedTheme);
+  }, []);
+
+  const updateTheme = (isDark) => {
+    setIsDarkTheme(isDark);
+    if (isDark) {
+      document.body.classList.add('dark-theme');
+      document.body.classList.remove('light-theme');
+    } else {
+      document.body.classList.add('light-theme');
+      document.body.classList.remove('dark-theme');
+    }
+  };
+
+  useEffect(() => {
     const themeChangeListener = window.matchMedia('(prefers-color-scheme: dark)');
     const handleThemeChange = (event) => {
-      updateTheme();
+      const isDark = event.matches;
+      localStorage.setItem('isDarkTheme', isDark);
+      updateTheme(isDark);
     };
-    
+
     themeChangeListener.addEventListener('change', handleThemeChange);
-  
+    
     return () => {
       themeChangeListener.removeEventListener('change', handleThemeChange);
     };

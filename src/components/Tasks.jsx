@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
 import Stories from '../components/Stories/Stories';
 import StoreCard from '../components/StoreCard';
-import arrow from '../components/icons/day-sort.svg'; // Импортируйте изображение
+import arrow from '../components/icons/day-sort.svg';
 
 import './Tasks.css';
 
-const Tasks = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+const Tasks = ({ isDarkTheme }) => {
   const [filter, setFilter] = useState('Day'); // Фильтр по умолчанию
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -26,11 +24,6 @@ const Tasks = () => {
     },
     // Добавьте другие магазины здесь...
   ];
-
-  const handleThemeToggle = (isDark) => {
-    setIsDarkTheme(isDark);
-    document.body.className = isDark ? 'dark-theme' : 'light-theme';
-  };
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -60,10 +53,11 @@ const Tasks = () => {
             <>
               <div className="dropdown-overlay" onClick={closeDropdown}></div>
               <div className="dropdown-content">
-                <div className="dropdown-item" onClick={() => handleFilterSelect('Day')}>Day</div>
-                <div className="dropdown-item" onClick={() => handleFilterSelect('Week')}>Week</div>
-                <div className="dropdown-item" onClick={() => handleFilterSelect('Month')}>Month</div>
-                <div className="dropdown-item" onClick={() => handleFilterSelect('Year')}>Year</div>
+                {['Day', 'Week', 'Month', 'Year'].map((item) => (
+                  <div key={item} className="dropdown-item" onClick={() => handleFilterSelect(item)}>
+                    {item}
+                  </div>
+                ))}
                 <div className="dropdown-item cancel" onClick={closeDropdown}>Cancel</div>
               </div>
             </>

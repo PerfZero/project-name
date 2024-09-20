@@ -62,8 +62,8 @@
           <Route path="/store" element={<Store />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/create-store/*" element={<CreateStore setShowHeader={setShowHeader} setShowFooter={setShowFooter} />} />
-          <Route path="/store/:storeId/*" element={<StoreDetails />} />
-        </Routes>
+          <Route path="/store/:storeId/*" element={<StoreDetails isDarkTheme={isDarkTheme} />} />
+            </Routes>
         {showFooter && <Footer />}
       </div>
     );

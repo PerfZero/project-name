@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     gap: 15px;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid var(--tg-theme-bg-color);
     border-radius: 12px 12px 0 0;
     padding: 0;
 }

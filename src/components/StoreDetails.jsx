@@ -19,9 +19,6 @@ const StoreDetails = () => {
     <div className="store-details">
       {/* Хедер с названием магазина и меню */}
       <div className="store-header order">
-        <NavLink to="/store">
-          <p className="back">Back</p>
-        </NavLink>
         <div className="store-info order">
           <img src="/img/store-cion.svg" alt="Store Logo" className="store-logo" />
           <div>

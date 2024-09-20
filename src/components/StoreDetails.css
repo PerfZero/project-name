@@ -6,7 +6,8 @@
     display: flex;
     flex-direction: row;
     gap: 26px;
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);   
+    color: var(--tg-theme-three-text);
     padding-top: 25px;
     margin-top: 0;
 }

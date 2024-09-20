@@ -22,6 +22,8 @@ code {
   --tg-theme-icon-activity: #1a4265;
   --tg-theme-three-bg: #efeff3;
   --tg-theme-three-text: #000;
+  --tg-theme-three-filter: rgba(60, 60, 67, 0.6);
+
 }
 
 .dark-theme {
@@ -33,6 +35,7 @@ code {
   --tg-theme-bg-def: #17181C  !important; /* Цвет фона для светлой темы */
   --tg-theme-three-bg: #23232D;
   --tg-theme-three-text: #fff;
+  --tg-theme-three-filter: rgba(199, 199, 199, 0.6);
 
 }
 

@@ -13,7 +13,7 @@
     display: flex !important;
     justify-content: space-between !important;
     padding: 11px 0;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid var(--tg-theme-bg-color);
     font-family: "SF Pro Display", sans-serif;
     font-weight: 400;
 }
@@ -50,14 +50,14 @@
 }
 
 .order-filter {
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);
     padding: 0 0 0 12px;
     border-radius: 10px;
 }
 
 .order-main_sec {
     position: relative;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid var(--tg-theme-bg-color);
     padding: 16px 0;
     width: 100%;
 }
@@ -71,7 +71,7 @@
 
 .filter-item {
     margin-right: 8px;
-    color: #000;
+    color: var(--tg-theme-three-text);
     font-weight: 400;
     font-size: 17px;
     font-family: "SF Pro Display", sans-serif;
@@ -79,7 +79,7 @@
 
 .number {
     margin-right: 8px;
-    color: #0e2539 !important;
+    color: var(--tg-theme-text-color) !important;
     font-weight: 500 !important;
     font-size: 17px;
 }
@@ -106,7 +106,7 @@
 }
 
 .filter-detail {
-    color: rgba(60, 60, 67, 0.6);
+    color: var(--tg-theme-three-filter);
     padding-right: 15px;
     font-family: "SF Pro Display", sans-serif;
     font-size: 17px;
@@ -124,7 +124,7 @@
 }
 
 .order-filter {
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);
     padding: 0 0 0 12px;
     border-radius: 10px;
 }

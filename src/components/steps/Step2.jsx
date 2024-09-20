@@ -47,24 +47,6 @@ const Step2 = ({ formData, setFormData }) => {
     navigate('/create-store/step3');
   };
 
-  useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const webApp = window.Telegram.WebApp;
-
-      webApp.BackButton.show();
-      webApp.BackButton.onClick(() => {
-        navigate('/create-store/step1');
-      });
-
-      return () => {
-        webApp.BackButton.offClick(() => {
-          navigate('/create-store/step1');
-        });
-        webApp.BackButton.hide();
-      };
-    }
-  }, [navigate]);
-
   return (
     <div className="container create-shop">
       <div className="header__create-shop">

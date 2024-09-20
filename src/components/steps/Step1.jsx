@@ -31,29 +31,6 @@ const Step1 = ({ formData, setFormData }) => {
     }
   };
 
-  // Логика кнопки "Назад" для Telegram WebApp
-  useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const webApp = window.Telegram.WebApp;
-
-      // Показываем кнопку назад
-      webApp.BackButton.show();
-
-      // Обработчик нажатия на кнопку "Назад"
-      webApp.BackButton.onClick(() => {
-        navigate('/');
-      });
-
-      // Очистка обработчика при размонтировании компонента
-      return () => {
-        webApp.BackButton.offClick(() => {
-          navigate('/');
-        });
-        webApp.BackButton.hide();
-      };
-    }
-  }, [navigate]);
-
   return (
     <div className="container create-shop">
       <div className="header__create-shop">

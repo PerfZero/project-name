@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProgressBar from '../ProgressBar'; // Убедитесь, что путь к компоненту правильный
-import './Step4.css'; // Убедитесь, что у вас есть стили для этого компонента
+import ProgressBar from '../ProgressBar';
+import './Step4.css';
 
 const Step4 = ({ formData, setFormData }) => {
   const [currency, setCurrency] = useState(formData.currency || 'USD');
@@ -10,8 +10,7 @@ const Step4 = ({ formData, setFormData }) => {
   const [email, setEmail] = useState(formData.email || '');
   const [phone, setPhone] = useState(formData.phone || '');
   const [address, setAddress] = useState(formData.address || '');
-
-  const [isSelectOpen, setIsSelectOpen] = useState(null); // Состояние для управления видимостью селектов
+  const [isSelectOpen, setIsSelectOpen] = useState(null);
 
   const navigate = useNavigate();
 
@@ -40,20 +39,39 @@ const Step4 = ({ formData, setFormData }) => {
   };
 
   const handleNext = () => {
-    // Обработка завершения создания магазина, например, переход на другой маршрут или выполнение других действий
     console.log('Shop created with the following data:', formData);
-    navigate('/create-store/step5'); // Замените на путь к следующему шагу
+    navigate('/create-store/step5');
   };
+
+  // Логика для отображения кнопки BackButton
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const webApp = window.Telegram.WebApp;
+
+      // Показываем кнопку назад
+      webApp.BackButton.show();
+
+      // Устанавливаем обработчик клика для перехода на предыдущий шаг
+      webApp.BackButton.onClick(() => {
+        navigate('/create-store/step3');
+      });
+
+      // Очищаем обработчики и скрываем кнопку при размонтировании
+      return () => {
+        webApp.BackButton.offClick(() => {
+          navigate('/create-store/step3');
+        });
+        webApp.BackButton.hide();
+      };
+    }
+  }, [navigate]);
 
   return (
     <div className="container create-shop">
       <div className="header__create-shop">
-        <a href="/create-store/step3">
-          <p className="back">Back</p>
-        </a>
         <h1 className="title-create__shop">Create your store</h1>
         <p className="sub-title_details">Additional Details</p>
-        <ProgressBar currentStep={4} /> {/* Добавляем ProgressBar */}
+        <ProgressBar currentStep={4} />
       </div>
 
       <div className="choose_type">
@@ -145,7 +163,7 @@ const Step4 = ({ formData, setFormData }) => {
           <button
             className="btn btn-catalog"
             onClick={handleNext}
-            disabled={!email || !phone || !address} // Убедитесь, что все обязательные поля заполнены
+            disabled={!email || !phone || !address}
           >
             Create Shop
           </button>

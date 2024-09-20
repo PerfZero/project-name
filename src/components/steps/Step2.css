@@ -88,9 +88,7 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-.gray {
-    color: #7a7a7a;
-}
+
 
 .select-items div:last-child {
     border-bottom: 0;

@@ -130,7 +130,7 @@ const Step3 = ({ formData, setFormData }) => {
       <div className="footer add-item_btn">
         <div className="contents">
           <button
-            className="btn btn-catalog"
+            className={`btn btn-catalog ${!storeName || !storeDescription ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={!storeName || !storeDescription}
           >

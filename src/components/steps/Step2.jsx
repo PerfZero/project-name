@@ -12,7 +12,6 @@ const Step2 = ({ formData, setFormData }) => {
 
   const navigate = useNavigate();
 
-  // Загрузка данных из localStorage при монтировании компонента
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
     if (savedFormData) {
@@ -140,7 +139,8 @@ const Step2 = ({ formData, setFormData }) => {
       <div className="footer add-item_btn">
         <div className="contents">
           <button
-            className="btn btn-catalog"
+            className={`btn btn-catalog ${!selectedStoreType || !selectedTheme || !channelLink || !botAPI ? 'disabled' : ''}`}
+            id="nextButton"
             onClick={handleNext}
             disabled={!selectedStoreType || !selectedTheme || !channelLink || !botAPI}
           >

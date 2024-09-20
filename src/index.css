@@ -14,7 +14,7 @@ code {
 
 
 :root {
-  --tg-theme-bg-color: #efeff3  ; /* Цвет фона для светлой темы */
+  --tg-theme-bg-color: #efeff3 !important ; /* Цвет фона для светлой темы */
   --tg-theme-bg-def: #fff  ; /* Цвет фона для светлой темы */
   --tg-theme-text-color: #0e2539 ; /* Цвет текста для светлой темы */
   --tg-theme-secondary-bg: #f5f5f5 ; /* Вторичный цвет фона для светлой темы */

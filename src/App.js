@@ -16,22 +16,28 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const checkTheme = () => {
+    const updateTheme = () => {
       const theme = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setIsDarkTheme(theme);
+      
+      if (theme) {
+        document.body.classList.add('dark-theme');
+        document.body.classList.remove('light-theme');
+      } else {
+        document.body.classList.add('light-theme');
+        document.body.classList.remove('dark-theme');
+      }
     };
-
-    checkTheme(); // Проверяем начальную тему
-
-    // Слушаем изменения темы
+  
+    updateTheme(); // Проверяем начальную тему
+  
     const themeChangeListener = window.matchMedia('(prefers-color-scheme: dark)');
     const handleThemeChange = (event) => {
-      setIsDarkTheme(event.matches);
+      updateTheme();
     };
     
     themeChangeListener.addEventListener('change', handleThemeChange);
-
-    // Убираем слушатель при размонтировании
+  
     return () => {
       themeChangeListener.removeEventListener('change', handleThemeChange);
     };

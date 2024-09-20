@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink, Route, Routes, useParams } from 'react-router-dom';
 import './StoreDetails.css'; // Импортируйте файл стилей
 import Orders from './Orders';
@@ -6,15 +6,10 @@ import Catalog from './Catalog';
 import Analytics from './Analytics';
 import Settings from './Settings';
 
-const StoreDetails = ({ isDarkTheme }) => {
+const StoreDetails = () => {
   const { storeId } = useParams(); // Получаем ID магазина из URL
 
   console.log('Store ID:', storeId); // Отладочная информация
-
-  useEffect(() => {
-    document.body.classList.toggle('dark-theme', isDarkTheme);
-    document.body.classList.toggle('light-theme', !isDarkTheme);
-  }, [isDarkTheme]);
 
   if (!storeId) {
     return <div>No store ID provided.</div>;

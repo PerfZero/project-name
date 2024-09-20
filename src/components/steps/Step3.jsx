@@ -1,28 +1,28 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProgressBar from '../ProgressBar'; // Убедитесь, что путь к компоненту правильный
-import './Step3.css'; // Убедитесь, что у вас есть стили для этого компонента
+import ProgressBar from '../ProgressBar';
+import './Step3.css';
 
 const Step3 = ({ formData, setFormData }) => {
   const [storeName, setStoreName] = useState(formData.storeName || '');
   const [storeDescription, setStoreDescription] = useState(formData.storeDescription || '');
   const [selectedLanguage, setSelectedLanguage] = useState(formData.language || 'English');
-  const [isSelectOpen, setIsSelectOpen] = useState(false); // Состояние для управления видимостью селекта
-  const [logo, setLogo] = useState(formData.logo || ''); // Состояние для хранения загруженного логотипа
-  const [fileKey, setFileKey] = useState(Date.now()); // Уникальный ключ для сброса input
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
+  const [logo, setLogo] = useState(formData.logo || '');
+  const [fileKey, setFileKey] = useState(Date.now());
 
-  const fileInputRef = useRef(null); // Ссылка на input file
+  const fileInputRef = useRef(null);
 
   const navigate = useNavigate();
 
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.textContent);
     setFormData({ ...formData, language: e.target.textContent });
-    setIsSelectOpen(false); // Закрываем селект после выбора
+    setIsSelectOpen(false);
   };
 
   const handleSelectToggle = () => {
-    setIsSelectOpen(!isSelectOpen); // Переключаем видимость селекта
+    setIsSelectOpen(!isSelectOpen);
   };
 
   const handleFileChange = (e) => {
@@ -30,32 +30,52 @@ const Step3 = ({ formData, setFormData }) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setLogo(reader.result); // Устанавливаем результат чтения файла в состояние
-        setFormData({ ...formData, logo: reader.result }); // Обновляем данные формы
+        setLogo(reader.result);
+        setFormData({ ...formData, logo: reader.result });
       };
-      reader.readAsDataURL(file); // Читаем файл как Data URL
+      reader.readAsDataURL(file);
     }
   };
 
   const handleRemoveLogo = () => {
-    setLogo(''); // Очищаем состояние логотипа
-    setFormData({ ...formData, logo: '' }); // Очищаем данные формы
-    setFileKey(Date.now()); // Сбрасываем ключ для input file
+    setLogo('');
+    setFormData({ ...formData, logo: '' });
+    setFileKey(Date.now());
     if (fileInputRef.current) {
-      fileInputRef.current.value = ''; // Очищаем значение поля file
+      fileInputRef.current.value = '';
     }
   };
 
   const handleNext = () => {
-    navigate('/create-store/step4'); // Замените на путь к следующему шагу
+    navigate('/create-store/step4');
   };
+
+  // Добавляем BackButton с логикой для шага 2
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const webApp = window.Telegram.WebApp;
+
+      // Показываем кнопку назад
+      webApp.BackButton.show();
+
+      // Устанавливаем обработчик клика на кнопку назад
+      webApp.BackButton.onClick(() => {
+        navigate('/create-store/step2');
+      });
+
+      // Убираем обработчики при размонтировании компонента
+      return () => {
+        webApp.BackButton.offClick(() => {
+          navigate('/create-store/step2');
+        });
+        webApp.BackButton.hide();
+      };
+    }
+  }, [navigate]);
 
   return (
     <div className="container create-shop">
       <div className="header__create-shop">
-        <a href="/create-store/step2">
-          <p className="back">Back</p>
-        </a>
         <h1 className="title-create__shop">Create your store</h1>
         <p className="sub-title_details">Store details</p>
         <ProgressBar currentStep={3} /> {/* Добавляем ProgressBar */}
@@ -68,7 +88,7 @@ const Step3 = ({ formData, setFormData }) => {
             <div className="shop_logo-load">
               {logo && (
                 <div className="logo-preview-container">
-                  <img src={logo} alt="Shop Logo" className="logo-preview" /> {/* Отображение загруженного логотипа */}
+                  <img src={logo} alt="Shop Logo" className="logo-preview" />
                   <button onClick={handleRemoveLogo} className="remove-logo-button">
                     Remove Logo
                   </button>
@@ -79,12 +99,12 @@ const Step3 = ({ formData, setFormData }) => {
                 id="shop-logo"
                 accept="image/*"
                 onChange={handleFileChange}
-                key={fileKey} // Используем ключ для сброса input
-                ref={fileInputRef} // Ссылка на input file
-                style={{ display: 'none' }} // Скрываем стандартное поле загрузки файла
+                key={fileKey}
+                ref={fileInputRef}
+                style={{ display: 'none' }}
               />
               <label htmlFor="shop-logo" className="upload-button">
-               +
+                +
               </label>
             </div>
           </div>

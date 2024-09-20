@@ -6,24 +6,15 @@ import StoreDetails from './components/StoreDetails';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CreateStore from './components/CreateStore';
+import TelegramBackButton from './components/TelegramBackButton'; // Импортируем компонент
 
 const App = () => {
-  // Состояние для управления темой (светлая/темная)
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-
-  // Функция переключения темы
-  const handleThemeToggle = (newTheme) => {
-    setIsDarkTheme(newTheme);
-  };
-
-  // Состояния для отображения хедера и футера
   const [showHeader, setShowHeader] = useState(true);
   const [showFooter, setShowFooter] = useState(true);
 
-  // Хук для отслеживания текущего маршрута
   const location = useLocation();
 
-  // Эффект для управления отображением хедера и футера в зависимости от маршрута
   useEffect(() => {
     if (location.pathname.startsWith('/create-store') || location.pathname.startsWith('/store/1/')) {
       setShowHeader(false);
@@ -35,30 +26,29 @@ const App = () => {
   }, [location.pathname]);
 
   return (
-    <div className={isDarkTheme ? 'dark-theme' : 'light-theme'}> {/* Применение темы ко всему приложению */}
+    <div className={isDarkTheme ? 'dark-theme' : 'light-theme'}>
       {showHeader && (
         <Header
-          onThemeToggle={handleThemeToggle} // Передаем функцию для переключения темы
-          isDarkTheme={isDarkTheme} // Передаем текущее состояние темы
+          onThemeToggle={setIsDarkTheme}
+          isDarkTheme={isDarkTheme}
         />
       )}
 
-      {/* Роутинг для переключения между страницами */}
+      {/* Telegram Back Button */}
+      <TelegramBackButton /> 
+
       <Routes>
         <Route path="/" element={<Navigate to="/store" />} />
         <Route path="/store" element={<Store />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route
           path="/create-store/*"
-          element={
-            <CreateStore setShowHeader={setShowHeader} setShowFooter={setShowFooter} /> // Управление хедером и футером
-          }
+          element={<CreateStore setShowHeader={setShowHeader} setShowFooter={setShowFooter} />}
         />
-        <Route path="/store/:storeId/*" element={<StoreDetails />} /> {/* Динамический маршрут для деталей магазина */}
+        <Route path="/store/:storeId/*" element={<StoreDetails />} />
       </Routes>
 
-      {/* Футер видим только если showFooter = true */}
-      {showFooter && <Footer isDarkTheme={isDarkTheme} />} {/* Передаем тему в футер */}
+      {showFooter && <Footer isDarkTheme={isDarkTheme} />}
     </div>
   );
 };

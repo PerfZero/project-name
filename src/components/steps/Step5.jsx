@@ -25,9 +25,6 @@ const Step5 = () => {
   return (
     <div className="container container-order">
       <div className="store-header order">
-        <a href="/create-contact">
-          <p className="back">Back</p>
-        </a>
         <h3 className="add-item-title">Add item</h3>
         <div className="store-menu add-item-menu">
           <div

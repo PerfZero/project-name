@@ -14,7 +14,6 @@ const Step4 = ({ formData, setFormData }) => {
   const [isSelectOpen, setIsSelectOpen] = useState(null);
   const navigate = useNavigate();
 
-  // Загрузка данных из localStorage при первом рендере
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
     if (savedFormData) {
@@ -32,6 +31,7 @@ const Step4 = ({ formData, setFormData }) => {
     const updatedFormData = { ...formData, [type]: value };
     setFormData(updatedFormData);
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
+
     switch (type) {
       case 'currency':
         setCurrency(value);
@@ -45,6 +45,8 @@ const Step4 = ({ formData, setFormData }) => {
       default:
         break;
     }
+
+    // Закрываем селект после выбора
     setIsSelectOpen(null);
   };
 
@@ -83,45 +85,55 @@ const Step4 = ({ formData, setFormData }) => {
 
       <div className="choose_type">
         <div className="container type-of">
+          {/* Currency Select */}
           <div className="input-group">
             <label htmlFor="currency">Currency</label>
-            <div className="custom-select" id="currency" onClick={() => setIsSelectOpen('currency')}>
+            <div className="custom-select" id="currency" onClick={() => setIsSelectOpen(isSelectOpen === 'currency' ? null : 'currency')}>
               <div className="select-selected">{currency}</div>
-              <div className={`select-items ${isSelectOpen === 'currency' ? '' : 'select-hide'}`}>
-                <div onClick={() => handleSelectChange('currency', 'USD')}>USD</div>
-                <div onClick={() => handleSelectChange('currency', 'EUR')}>EUR</div>
-                <div onClick={() => handleSelectChange('currency', 'GBP')}>GBP</div>
-              </div>
+              {isSelectOpen === 'currency' && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('currency', 'USD')}>USD</div>
+                  <div onClick={() => handleSelectChange('currency', 'EUR')}>EUR</div>
+                  <div onClick={() => handleSelectChange('currency', 'GBP')}>GBP</div>
+                </div>
+              )}
             </div>
             <i className="arrow-down"></i>
           </div>
 
+          {/* Payment Methods Select */}
           <div className="input-group">
             <label htmlFor="payment-methods">Payments</label>
-            <div className="custom-select" id="payment-methods" onClick={() => setIsSelectOpen('payment')}>
+            <div className="custom-select" id="payment-methods" onClick={() => setIsSelectOpen(isSelectOpen === 'payment' ? null : 'payment')}>
               <div className="select-selected">{paymentMethods}</div>
-              <div className={`select-items ${isSelectOpen === 'payment' ? '' : 'select-hide'}`}>
-                <div onClick={() => handleSelectChange('payment', 'Crypto, Bank cards')}>Crypto, Bank cards</div>
-                <div onClick={() => handleSelectChange('payment', 'PayPal')}>PayPal</div>
-                <div onClick={() => handleSelectChange('payment', 'Stripe')}>Stripe</div>
-              </div>
+              {isSelectOpen === 'payment' && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('payment', 'Crypto, Bank cards')}>Crypto, Bank cards</div>
+                  <div onClick={() => handleSelectChange('payment', 'PayPal')}>PayPal</div>
+                  <div onClick={() => handleSelectChange('payment', 'Stripe')}>Stripe</div>
+                </div>
+              )}
             </div>
             <i className="arrow-down"></i>
           </div>
 
+          {/* Delivery Methods Select */}
           <div className="input-group">
             <label htmlFor="delivery-methods">Delivery</label>
-            <div className="custom-select" id="delivery-methods" onClick={() => setIsSelectOpen('delivery')}>
+            <div className="custom-select" id="delivery-methods" onClick={() => setIsSelectOpen(isSelectOpen === 'delivery' ? null : 'delivery')}>
               <div className="select-selected">{deliveryMethods}</div>
-              <div className={`select-items ${isSelectOpen === 'delivery' ? '' : 'select-hide'}`}>
-                <div onClick={() => handleSelectChange('delivery', 'FeedEx')}>FeedEx</div>
-                <div onClick={() => handleSelectChange('delivery', 'DHL')}>DHL</div>
-                <div onClick={() => handleSelectChange('delivery', 'UPS')}>UPS</div>
-              </div>
+              {isSelectOpen === 'delivery' && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('delivery', 'FeedEx')}>FeedEx</div>
+                  <div onClick={() => handleSelectChange('delivery', 'DHL')}>DHL</div>
+                  <div onClick={() => handleSelectChange('delivery', 'UPS')}>UPS</div>
+                </div>
+              )}
             </div>
             <i className="arrow-down"></i>
           </div>
 
+          {/* Email Input */}
           <div className="input-group">
             <label htmlFor="email">E-mail</label>
             <input
@@ -133,6 +145,7 @@ const Step4 = ({ formData, setFormData }) => {
             />
           </div>
 
+          {/* Phone Input */}
           <div className="input-group">
             <label htmlFor="phone">Phone</label>
             <input
@@ -144,6 +157,7 @@ const Step4 = ({ formData, setFormData }) => {
             />
           </div>
 
+          {/* Address Input */}
           <div className="input-group">
             <label htmlFor="address">Address</label>
             <textarea
@@ -159,7 +173,7 @@ const Step4 = ({ formData, setFormData }) => {
       <div className="footer add-item_btn">
         <div className="contents">
           <button
-            className="btn btn-catalog"
+            className={`btn btn-catalog ${!email || !phone || !address ? 'disabled' : ''}`}
             onClick={handleNext}
             disabled={!email || !phone || !address}
           >

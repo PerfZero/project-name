@@ -123,7 +123,7 @@ label, select, textarea, input {
     padding: 10px 15px;
     border-radius: 10px;
     font-size: 17px;
-    color: #7a7a7a;
+    color: #000;
 }
 
 input[type="radio"]::before {

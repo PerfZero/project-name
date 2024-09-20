@@ -1,5 +1,5 @@
 .read-faq {
-    background-color: #fff;
+    background-color: var(--tg-theme-bg-def);
     padding: 0 20px;
     display: flex;
     margin: 0 20px;
@@ -24,7 +24,7 @@
 .learn h3 {
     font-size: 14px;
     margin-bottom: 10px;
-    color: #0e2539;
+    color: var(--tg-theme-text-color);
 }
 
 .learn p {
@@ -35,12 +35,3 @@
 }
 
 
-.read-faq.dark-theme{
-    background-color: #121212;
-    color: #ffffff;
-  }
-  
-  .read-faq.light-theme{
-    background-color: #fff;
-    color: #0e2539;
-  }

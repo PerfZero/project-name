@@ -29,7 +29,7 @@
     display: flex;
     text-align: center;
     padding: 0;
-    background-color: var(--tg-theme-secondary-bg);;
+    background-color: var(--tg-theme-secondary-bg);
     border-top: 1px solid #ddd;
     justify-content: space-between;
     width: 100%;

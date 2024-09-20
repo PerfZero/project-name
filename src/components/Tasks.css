@@ -12,7 +12,7 @@
 .stores-header .title {
     font-size: 22px;
     font-weight: bold;
-    color: #0e2539;
+    color: var(--tg-theme-text-color);
 }
 
 .store-logo {

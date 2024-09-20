@@ -1,5 +1,5 @@
 .store-card {
-    background-color: white;
+    background-color: var(--tg-theme-bg-def);
     border-radius: 16px;
     padding: 16px;
     margin-bottom: 15px;
@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--tg-theme-bg-color);
     padding-bottom: 16px;
     margin-bottom: 17px;
 }
@@ -58,7 +58,7 @@
 
 .stat-value {
     font-size: 15px;
-    color: #0e2539;
+    color: var(--tg-theme-text-color);
     font-weight: 600;
 }
 .store-arrow img {
@@ -67,7 +67,7 @@
 
 .store-name {
     font-size: 17px;
-    color: #0e2539;
+    color: var(--tg-theme-text-color);
     font-weight: 500;
     margin-bottom: 3px;
 }

@@ -6,8 +6,8 @@
     display: flex;
     text-align: center;
     padding: 0;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
+    background-color:  var(--tg-theme-secondary-bg);
+    border-top: 1px solid  var(--tg-theme-secondary-bg);
     justify-content: space-between;
     width: 100%;
     z-index: 5;
@@ -17,8 +17,8 @@
     margin: 0 10px;
     padding: 10px;
     text-decoration: none;
-    color: #999999;
-    fill: #999999;
+    color: var(--tg-theme-icon);
+    fill: var(--tg-theme-icon);
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -33,8 +33,8 @@
   }
   
   .footer-button.active {
-    color: #1a4265;
-    fill:#1a4265 ;
+    color: var(--tg-theme-icon-activity) !important;
+    fill: var(--tg-theme-icon-activity) ;
 
   }
 

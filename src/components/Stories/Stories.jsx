@@ -40,6 +40,18 @@ const Stories = () => {
       closeModal(); // Закрываем, если это было последнее изображение
     }
   };
+
+  const prevImage = () => {
+    const currentIndex = images.findIndex(img => img.id === selectedImage.id);
+    const prevIndex = currentIndex - 1;
+  
+    if (prevIndex >= 0) {
+      setSelectedImage(images[prevIndex]);
+    } else {
+      closeModal(); // Закрываем, если это первая история
+    }
+  };
+  
   
 
   useEffect(() => {
@@ -84,8 +96,9 @@ const Stories = () => {
             style={{ backgroundColor: selectedImage.color }}
             aria-label={selectedImage.alt}
           />
-          <button className="prev" onClick={(e) => { e.stopPropagation(); nextImage(); }}>❮</button>
-          <button className="next" onClick={(e) => { e.stopPropagation(); nextImage(); }}>❯</button>
+          <button className="prev" onClick={(e) => { e.stopPropagation(); prevImage(); }}>❮</button>
+<button className="next" onClick={(e) => { e.stopPropagation(); nextImage(); }}>❯</button>
+
         </div>
       )}
     </div>

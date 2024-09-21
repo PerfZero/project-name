@@ -12,12 +12,10 @@
     
 }
 
-.activ_on {
-    border: 2px solid #d53e76;
-}
+
 
 .image:not(.viewed) {
-    border: 2px solid blue; /* Бордер для непросмотренных историй */
+    border: 2px solid #d53e76; /* Бордер для непросмотренных историй */
   }
 
 

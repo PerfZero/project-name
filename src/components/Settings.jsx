@@ -9,7 +9,7 @@ const Settings = () => {
   const [delivery, setDelivery] = useState('FeedEx');
 
   return (
-    <div className="container">
+    <div className="container setting-wrap">
       <div className="container_wrap">
         <div className="input-group">
           <label htmlFor="shop-logo">Shop logo</label>
@@ -110,7 +110,12 @@ const Settings = () => {
           <input type="tel" id="phone" placeholder="Enter phone number" />
         </div>
       </div>
-    </div>
+
+      <div className="footers fix-footer">
+        <div className="contents">
+          <div className="btn btn-catalog">Save</div>
+        </div>
+      </div>    </div>
   );
 };
 

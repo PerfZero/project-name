@@ -22,6 +22,11 @@
     display: none;
 }
 
+.order-contents {
+    background-color: var(--tg-theme-three-bg);
+    padding: 16px;
+    padding-bottom: 0;
+}
 
 
 .filter-item {
@@ -47,9 +52,12 @@
 
 .orders {
     padding: 0 16px 16px 16px;
-    height: 100vh;
-}
 
+
+}
+.fix-footer{
+    padding-top: 16px;
+}
 .order-contents {
     background-color: #efeff3;
     padding: 16px;

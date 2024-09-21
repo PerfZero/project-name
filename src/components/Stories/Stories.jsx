@@ -2,75 +2,90 @@ import React, { useState, useEffect } from 'react';
 import './Stories.css';
 
 const images = [
-  { id: 1, src: '/img/Image-56.png', alt: 'Icon1' },
-  { id: 2, src: '/img/Image-56-1.png', alt: 'Icon2' },
-  { id: 3, src: '/img/Image-56-2.png', alt: 'Icon3' },
-  { id: 4, src: '/img/Image-56-3.png', alt: 'Icon4' },
+  { id: 1, icon: '/img/Image-56.png', color: 'red', alt: 'Story 1' },
+  { id: 2, icon: '/img/Image-56-1.png', color: 'green', alt: 'Story 2' },
+  { id: 3, icon: '/img/Image-56-2.png', color: 'blue', alt: 'Story 3' },
+  { id: 4, icon: '/img/Image-56-3.png', color: 'yellow', alt: 'Story 4' },
 ];
 
 const Stories = () => {
-  const [activeImageIndex, setActiveImageIndex] = useState(0); // Текущая активная история
-  const [viewedImages, setViewedImages] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [viewedStories, setViewedStories] = useState(new Set());
 
-  useEffect(() => {
-    if (!isModalOpen) return; // Если модальное окно закрыто, нет смысла переключать истории
-
-    // Закрыть модальное окно после последней истории
-    if (activeImageIndex >= images.length) {
-      setIsModalOpen(false);
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      handleNextImage();
-    }, 5000); // Переключение через 5 секунд
-
-    return () => clearTimeout(timer); // Очищаем таймер при размонтировании или изменении
-  }, [activeImageIndex, isModalOpen]);
-
-  const handleClick = (index) => {
-    setActiveImageIndex(index);
-    setViewedImages((prev) => [...new Set([...prev, index])]); // Добавляем в список просмотренных
-    setIsModalOpen(true); // Открываем модальное окно
-  };
-
-  const handleNextImage = () => {
-    if (activeImageIndex < images.length - 1) {
-      setActiveImageIndex((prevIndex) => prevIndex + 1); // Переход к следующей истории
-    } else {
-      setIsModalOpen(false); // Закрытие модального окна после последней истории
-    }
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setIsPlaying(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
-    setActiveImageIndex(0); // Сброс индекса, если нужно
+    if (selectedImage) {
+      setViewedStories((prev) => new Set(prev).add(selectedImage.id)); // Добавляем просмотренную историю
+    }
+    setSelectedImage(null);
+    setIsPlaying(false);
   };
+
+  const nextImage = () => {
+    if (selectedImage) {
+      setViewedStories((prev) => new Set(prev).add(selectedImage.id)); // Добавляем просмотренную историю
+    }
+    
+    const currentIndex = images.findIndex(img => img.id === selectedImage.id);
+    const nextIndex = currentIndex + 1;
+  
+    if (nextIndex < images.length) {
+      setSelectedImage(images[nextIndex]);
+    } else {
+      closeModal(); // Закрываем, если это было последнее изображение
+    }
+  };
+  
+
+  useEffect(() => {
+    let interval;
+    if (isPlaying) {
+      interval = setInterval(() => {
+        nextImage();
+      }, 3000); // Меняем изображение каждые 3 секунды
+    }
+
+    return () => clearInterval(interval); // Очистка интервала при размонтировании
+  }, [isPlaying, selectedImage]);
 
   return (
     <div>
       <div className="icons">
-        {images.map((image, index) => (
+        {images.map((image) => (
           <img
             key={image.id}
-            className={`image ${viewedImages.includes(index) ? '' : 'activ_on'}`}
-            src={image.src}
+            className={`image ${viewedStories.has(image.id) ? 'viewed' : ''}`} // Добавление класса viewed
+            src={image.icon}
             alt={image.alt}
-            onClick={() => handleClick(index)}
+            onClick={() => handleImageClick(image)}
           />
         ))}
       </div>
 
-      {isModalOpen && (
+      {selectedImage && (
         <div className="modal" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={images[activeImageIndex].src}
-              alt="Active Story"
-              className="active-image"
-            />
+          <div className="story-progress-bar">
+            {images.map((image) => (
+              <div
+                key={image.id}
+                className={`progress-items ${selectedImage.id === image.id ? 'active' : ''}`}
+              >
+                <div className={`fill ${viewedStories.has(image.id) ? 'viewed' : ''} ${selectedImage.id === image.id ? 'animate' : ''}`} />
+              </div>
+            ))}
           </div>
+          <div
+            className="modal-image"
+            style={{ backgroundColor: selectedImage.color }}
+            aria-label={selectedImage.alt}
+          />
+          <button className="prev" onClick={(e) => { e.stopPropagation(); nextImage(); }}>❮</button>
+          <button className="next" onClick={(e) => { e.stopPropagation(); nextImage(); }}>❯</button>
         </div>
       )}
     </div>

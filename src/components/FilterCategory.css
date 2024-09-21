@@ -39,6 +39,23 @@
 
   }
 
+  .filter-item.actives::before{
+    content: '';
+    background-color: #d53e76;
+    width: 10px;
+    height: 10px;
+    top: 16px;
+    position: absolute;
+    right: 10px;
+    border-radius: 100%;
+
+  }
+
+  .filter-item{
+position: relative;
+  }
+
+
   .arrow-down {
     content: url(./img/arrow-rgth.svg);
 }

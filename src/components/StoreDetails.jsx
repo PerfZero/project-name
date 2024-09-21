@@ -32,25 +32,25 @@ const StoreDetails = () => {
         <div className="store-menu">
           <NavLink 
             to="orders" 
-            className={({ isActive }) => isActive ? "store-menu_item active" : "store-menu_item"}
+            className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
           >
             Orders
           </NavLink>
           <NavLink 
             to="catalog" 
-            className={({ isActive }) => isActive ? "store-menu_item active" : "store-menu_item"}
+            className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
           >
             Catalog
           </NavLink>
           <NavLink 
             to="analytics" 
-            className={({ isActive }) => isActive ? "store-menu_item active" : "store-menu_item"}
+            className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
           >
             Analytics
           </NavLink>
           <NavLink 
             to="settings" 
-            className={({ isActive }) => isActive ? "store-menu_item active" : "store-menu_item"}
+            className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
           >
             Settings
           </NavLink>

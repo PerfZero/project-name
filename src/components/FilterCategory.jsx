@@ -11,7 +11,7 @@ const FilterPopup = ({ isOpen, onClose, onCategorySelect, selectedCategory }) =>
       <div className="filter-popup-content">
         {categories.map((category, index) => (
           <div
-            className={`filter-item ${category === selectedCategory ? 'active' : ''}`}
+            className={`filter-item ${category === selectedCategory ? 'actives' : ''}`}
             key={index}
             onClick={() => onCategorySelect(category)}
           >
@@ -44,7 +44,7 @@ const FilterCategory = ({ onCategoryChange }) => {
     <div className="order-contents">
       <div className="order-filter">
         <div className="filter-class-item" id="catalog-categories">
-          <p className="filter-items" onClick={handleTogglePopup}>Categories</p>
+          <p className="filter-item" onClick={handleTogglePopup}>Categories</p>
           <p className="filter-detail">{selectedCategory}</p>
         </div>
         <div className="filter-class-item">

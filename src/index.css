@@ -84,3 +84,7 @@ a {
 #store-type .arrow-down{
   top: 16px;
 }
+
+.status::after{
+  display: none;
+}

@@ -18,7 +18,8 @@
   
   .logo {
     height: 40px;
-  }
+    width: 32vw;
+} 
   
   .header-buttons {
     width: 100%;
@@ -26,6 +27,10 @@
     align-items: center;
     justify-content: space-between;
 
+  }
+
+  .header-content svg path{
+    fill:var(--tg-theme-text-color)
   }
 
   .wallet{
@@ -36,7 +41,7 @@
   .settings-toggle {
     background: none;
 
-    font-size: 16px;
+    font-size: 4vw;
     border: none;
     border-radius: 5px;
     cursor: pointer;

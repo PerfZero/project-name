@@ -18,6 +18,12 @@
     font-weight: 400;
 }
 
+.catalog-status::after{
+    display: none;
+}
+
+
+
 .filter-item {
     margin-right: 8px;
     color: #000;

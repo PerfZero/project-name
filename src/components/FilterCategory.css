@@ -46,9 +46,16 @@
 .input-group .arrow-down {
   position: absolute;
   right: 20px;
-  top: 16px;
+  top: 43px;
   transform: rotate(90deg);
 }
+
+.filter-detail::after {
+  content: url(./img/arrow-rgth.svg);
+  padding-left: 15px;
+}
+
+
 
   .filter-popup .filter-item:last-child {
     border-bottom: none !important;

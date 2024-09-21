@@ -4,13 +4,7 @@ function TelegramBackButton() {
   useEffect(() => {
     const tg = window.Telegram.WebApp;
 
-    // Установка флага для вертикальных свайпов
-    tg.WebApp.on('isVerticalSwipesEnabled', (isEnabled) => {
-      // Здесь вы можете обрабатывать изменения флага, если это нужно
-      console.log('Vertical swipes enabled:', isEnabled);
-    });
-
-    const isHomePage = window.location.pathname === '/store'; // Проверка на главную страницу
+    const isHomePage = window.location.pathname === '/store/'; // Проверка на главную страницу
 
     if (isHomePage) {
       if (!tg.BackButton.isVisible) {

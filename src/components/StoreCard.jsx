@@ -1,11 +1,10 @@
 import React from 'react';
-import './StoreCard.css'; // Импортируйте файл стилей
-import arrow from '../components/icons/arrow-rgth.svg'; // Импортируйте изображение
-import Store from '../components/icons/store-cion.svg'; // Импортируйте изображение
+import './StoreCard.css'; // Импорт стилей
+import arrow from '../components/icons/arrow-rgth.svg'; // Импорт иконки стрелки
+import Store from '../components/icons/store-cion.svg'; // Импорт иконки магазина
 
 const StoreCard = ({ store }) => {
-  // Отладочный вывод
-  console.log('Store data:', store);
+  console.log('Store data:', store); // Отладочный вывод для проверки данных
 
   return (
     <div className="store-card">
@@ -13,14 +12,15 @@ const StoreCard = ({ store }) => {
         <div className="store-info">
           <img src={Store} alt="Store Logo" className="store-logo" />
           <div>
+            {/* Используем store.name для отображения имени магазина */}
             <div className="store-name">{store.name}</div>
             <a href={`https://t.me/${store.username}`}>
-              <div className="store-username">{store.username}</div>
+              <div className="store-username">@{store.username}</div> {/* Добавлен "@" перед username */}
             </a>
           </div>
         </div>
         <div className="store-arrow">
-          {/* Обновите ссылку на уникальный URL деталей */}
+          {/* Используем store.id только для формирования ссылки на детальную страницу */}
           <a href={`/store/${store.id}/orders`}>
             <img src={arrow} alt="Arrow" className="arrow" />
           </a>

@@ -1,18 +1,20 @@
 import React from 'react';
 import { NavLink, Route, Routes, useParams } from 'react-router-dom';
-import './StoreDetails.css'; // Импортируйте файл стилей
+import './StoreDetails.css'; // Импорт стилей
 import Orders from './Orders';
 import Catalog from './Catalog';
 import Analytics from './Analytics';
 import Settings from './Settings';
+import stores from './StoreData'; // Импорт по умолчанию
 
 const StoreDetails = () => {
-  const { storeId } = useParams(); // Получаем ID магазина из URL
+  const { storeId } = useParams();
+  const store = stores.find((s) => s.id === storeId);
 
-  console.log('Store ID:', storeId); // Отладочная информация
+  console.log('Store ID:', storeId, 'Store Data:', store);
 
-  if (!storeId) {
-    return <div>No store ID provided.</div>;
+  if (!store) {
+    return <div>No store data found for this ID.</div>;
   }
 
   return (
@@ -22,9 +24,9 @@ const StoreDetails = () => {
         <div className="store-info order">
           <img src="/img/store-cion.svg" alt="Store Logo" className="store-logo" />
           <div>
-            <div className="store-name">{storeId} Store</div>
-            <a href={`https://t.me/${storeId}`}>
-              <div className="store-username">@{storeId}</div>
+            <div className="store-name">{store.name}</div>
+            <a href={`https://t.me/${store.username}`}>
+              <div className="store-username">{store.username}</div>
             </a>
           </div>
         </div>

@@ -34,5 +34,5 @@
 }
 
 .activet{
-color: #000 !important  ;
+color: var(--tg-theme-three-text) !important  ;
 }

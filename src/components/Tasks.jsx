@@ -2,28 +2,13 @@ import React, { useState } from 'react';
 import Stories from '../components/Stories/Stories';
 import StoreCard from '../components/StoreCard';
 import arrow from '../components/icons/day-sort.svg';
+import stores from './StoreData'; // Импорт по умолчанию
 
 import './Tasks.css';
 
 const Tasks = ({ isDarkTheme }) => {
-  const [filter, setFilter] = useState('Day'); // Фильтр по умолчанию
+  const [filter, setFilter] = useState('Day');
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  // Данные магазинов (пример)
-  const stores = [
-    {
-      id: '1',
-      name: 'Toy Seller',
-      username: '@ToySellerBot',
-      revenue: '$27,392.00',
-      orders: 64,
-      avgBill: '$428.00',
-      repeatOrders: 12,
-      partnerPayments: '$428.00',
-      unpaidOrders: 8,
-    },
-    // Добавьте другие магазины здесь...
-  ];
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -41,7 +26,7 @@ const Tasks = ({ isDarkTheme }) => {
   return (
     <div className={`tasks-page ${isDarkTheme ? 'dark-theme' : 'light-theme'}`}>
       <Stories />
-      
+
       <div className="your-stores">
         <div className="stores-header">
           <div className="title">Your stores</div>
@@ -69,7 +54,7 @@ const Tasks = ({ isDarkTheme }) => {
           <StoreCard key={store.id} store={store} />
         ))}
       </div>
-      
+
       <div className="content store">
         <a href="/order.html" className="btn">Add store</a>
       </div>

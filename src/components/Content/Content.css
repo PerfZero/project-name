@@ -19,6 +19,10 @@
     font-size: 15px;
 }
 
+.store-details .arrow-down{
+    top: 18px !important;
+}
+
 .btn {
     display: block;
     padding: 12px 0;
@@ -28,6 +32,7 @@
     border-radius: 16px;
     text-decoration: none;
     cursor: pointer;
+    text-align: center;
     font-weight: 600;
     border: 3px solid #d53e76;
 }

@@ -66,13 +66,7 @@
     align-items: center;
   }
   
-  button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-  }
+
   
   .prev, .next {
     position: absolute;

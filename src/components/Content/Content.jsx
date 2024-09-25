@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Content.css';
 import moneyImage from './money.png'; // Убедитесь, что путь к изображению корректен
-import { triggerNotificationOccurred } from '../utils/hapticFeedback'; // Import haptic feedback utility
+import { triggerNotificationOccurred } from '../../utils/hapticFeedback'; // Import haptic feedback utility
 
 const Content = () => {
   const handleCreateStoreClick = () => {

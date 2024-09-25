@@ -3,6 +3,7 @@ import Stories from '../components/Stories/Stories';
 import StoreCard from '../components/StoreCard';
 import arrow from '../components/icons/day-sort.svg';
 import stores from './StoreData'; // Импорт по умолчанию
+import { HapticFeedback } from '@twa-dev/sdk'; // Импорт haptic feedback SDK
 
 import './Tasks.css';
 
@@ -21,6 +22,9 @@ const Tasks = ({ isDarkTheme }) => {
   const handleFilterSelect = (filter) => {
     setFilter(filter);
     closeDropdown();
+    
+    // Вызов haptic feedback при выборе фильтра
+    HapticFeedback.impactLight(); // Легкий тактильный отклик
   };
 
   return (

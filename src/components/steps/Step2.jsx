@@ -50,12 +50,12 @@ const Step2 = ({ formData, setFormData }) => {
     <div className="container create-shop">
       <div className="header__create-shop">
         <h1 className="title-create__shop">Create your store</h1>
-        <p className="sub-title_details">Add your bot</p>
+        <p className="sub-title_details">Shop settings</p>
         <ProgressBar currentStep={2} />
       </div>
 
       <div className="choose_type">
-        <h2 className="choose_text">Type of store</h2>
+        <h2 className="choose_text">Type</h2>
         <div className="choose_block">
           <div className="type__block">
             <div className="input__block">
@@ -74,8 +74,7 @@ const Step2 = ({ formData, setFormData }) => {
                   type="radio"
                   name="store_type"
                   value="booking"
-                  checked={selectedStoreType === 'booking'}
-                  onChange={handleStoreTypeChange}
+                  disabled
                 />
                 Booking
               </label>
@@ -86,7 +85,7 @@ const Step2 = ({ formData, setFormData }) => {
                   value="coming_soon"
                   disabled
                 />
-                Coming soon
+                Delivery 
               </label>
             </div>
 

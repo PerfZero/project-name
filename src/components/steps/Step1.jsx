@@ -41,12 +41,12 @@ const Step1 = ({ formData, setFormData }) => {
     <div className="container create-shop">
       <div className="header__create-shop">
         <h1 className="title-create__shop">Create your store</h1>
-        <p className="sub-title_details">Shop details</p>
+        <p className="sub-title_details">Seller details</p>
         <ProgressBar currentStep={1} />
       </div>
 
       <div className="choose_type">
-        <h2 className="choose_text">Choose type</h2>
+        <h2 className="choose_text">Merchant</h2>
         <div className="choose_block">
           <div
             className={`choose_block-item ${selectedType === 'personal' ? 'selected' : ''}`}
@@ -55,7 +55,7 @@ const Step1 = ({ formData, setFormData }) => {
           >
             <img src={personalIcon} alt="Personal" width="32" height="32px" className="choose_block-img" />
             <h3 className="choose_block-title">Personal</h3>
-            <p className="choose_block-subtitle">Description</p>
+            <p className="choose_block-subtitle">for self-employed sellers</p>
           </div>
           <div
             className={`choose_block-item ${selectedType === 'business' ? 'selected' : ''}`}
@@ -64,7 +64,7 @@ const Step1 = ({ formData, setFormData }) => {
           >
             <img src={businessIcon} alt="Business" width="32" height="32px" className="choose_block-img" />
             <h3 className="choose_block-title">Business</h3>
-            <p className="choose_block-subtitle">Description</p>
+            <p className="choose_block-subtitle">for individual entrepreneurs and small companies</p>
           </div>
         </div>
       </div>

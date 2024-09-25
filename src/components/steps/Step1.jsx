@@ -3,13 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import personalIcon from '../assets/user.svg';
 import businessIcon from '../assets/briefcase.svg';
 import ProgressBar from '../ProgressBar';
+import { initHapticFeedback } from '@telegram-apps/sdk'; // Import haptic feedback initialization
 import './Step1.css';
 
 const Step1 = ({ formData, setFormData }) => {
   const [selectedType, setSelectedType] = useState(formData?.userType || '');
   const navigate = useNavigate();
+  
+  // Initialize haptic feedback
+  const hapticFeedback = initHapticFeedback();
 
-  // Загрузка данных из localStorage при первом рендере
+  // Load data from localStorage on first render
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
     if (savedFormData && savedFormData.userType) {
@@ -22,11 +26,13 @@ const Step1 = ({ formData, setFormData }) => {
     const updatedFormData = { ...formData, userType: type };
     setSelectedType(type);
     setFormData(updatedFormData);
-    localStorage.setItem('formData', JSON.stringify(updatedFormData)); // Сохраняем данные в localStorage
+    localStorage.setItem('formData', JSON.stringify(updatedFormData)); // Save data to localStorage
+    hapticFeedback.impactOccurred('medium'); // Trigger haptic feedback on selection
   };
 
   const handleNext = () => {
     if (selectedType) {
+      hapticFeedback.notificationOccurred('success'); // Trigger haptic feedback on next button click
       navigate('/create-store/step2');
     }
   };

@@ -16,7 +16,7 @@ const Content = () => {
     <div className="content">
       <img src={moneyImage} alt="Flying money" />
       <div className="title">
-        Create your own store<br />
+        Create your own shop<br />
         on Telegram
       </div>
       <div className="description">
@@ -24,7 +24,7 @@ const Content = () => {
         platform for e-commerce.
       </div>
       <Link to="/create-store/step1" className="btn create-store main-btn" onClick={handleCreateStoreClick}>
-        Create store
+        Create Shop
       </Link>
     </div>
   );

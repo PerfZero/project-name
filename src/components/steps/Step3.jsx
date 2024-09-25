@@ -6,23 +6,12 @@ import './Step3.css';
 const Step3 = ({ formData, setFormData }) => {
   const [storeName, setStoreName] = useState(formData.storeName || '');
   const [storeDescription, setStoreDescription] = useState(formData.storeDescription || '');
-  const [selectedLanguage, setSelectedLanguage] = useState(formData.language || 'English');
-  const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [logo, setLogo] = useState(formData.logo || '');
   const [fileKey, setFileKey] = useState(Date.now());
 
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleLanguageChange = (e) => {
-    setSelectedLanguage(e.target.textContent);
-    setFormData({ ...formData, language: e.target.textContent });
-    setIsSelectOpen(false);
-  };
-
-  const handleSelectToggle = () => {
-    setIsSelectOpen(!isSelectOpen);
-  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -112,18 +101,7 @@ const Step3 = ({ formData, setFormData }) => {
             />
           </div>
 
-          <div className="input-group">
-            <label htmlFor="currency">Language</label>
-            <div className="custom-select" id="currency" onClick={handleSelectToggle}>
-              <div className="select-selected">{selectedLanguage}</div>
-              <div className={`select-items ${isSelectOpen ? '' : 'select-hide'}`}>
-                <div onClick={handleLanguageChange}>English</div>
-                <div onClick={handleLanguageChange}>Spanish</div>
-                <div onClick={handleLanguageChange}>French</div>
-              </div>
-            </div>
-            <i className="arrow-down"></i>
-          </div>
+        
         </div>
       </div>
 

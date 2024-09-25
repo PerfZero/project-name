@@ -30,6 +30,12 @@ input[type] {
     color: var(--tg-theme-three-text);
 }
 
+.input__block label:nth-child(2) {
+    border-bottom: 0;
+    border-bottom: 1px solid var(--tg-theme-bg-color);
+    color: #c7c7cc67;
+}
+
 input[type="radio"] {
     appearance: none;
     -ms-transform: scale(0.5);

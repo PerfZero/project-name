@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Content.css';
-import moneyImage from './money.png'; // Убедитесь, что путь к изображению корректен
-import { triggerImpactOccurred } from '../../utils/hapticFeedback'; // Import haptic feedback utility
+import moneyImage from './money.png'; // Ensure the path to the image is correct
+import { initHapticFeedback } from '@telegram-apps/sdk'; // Import haptic feedback initialization
 
 const Content = () => {
   const handleCreateStoreClick = () => {
-    localStorage.removeItem('formData'); // Очищаем данные из localStorage
-    triggerImpactOccurred('light'); // Trigger haptic feedback on button click
+    localStorage.removeItem('formData'); // Clear data from localStorage
+
+    const hapticFeedback = initHapticFeedback(); // Initialize haptic feedback
+    hapticFeedback.notificationOccurred('success'); // Trigger haptic feedback on button click
   };
 
   return (
@@ -21,7 +23,6 @@ const Content = () => {
         SPRUTON definitely simplest and useful <br />
         platform for e-commerce.
       </div>
-      {/* Используем Link с onClick для очищения localStorage */}
       <Link to="/create-store/step1" className="btn create-store main-btn" onClick={handleCreateStoreClick}>
         Create store
       </Link>

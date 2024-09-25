@@ -5,13 +5,16 @@ import './Step3.css';
 
 const Step3 = ({ formData, setFormData }) => {
   const [storeName, setStoreName] = useState(formData.storeName || '');
+  const [currency, setCurrency] = useState(formData.currency || 'USD');
   const [storeDescription, setStoreDescription] = useState(formData.storeDescription || '');
   const [logo, setLogo] = useState(formData.logo || '');
   const [fileKey, setFileKey] = useState(Date.now());
+  
+  // New state for managing the select dropdown
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
-
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -38,18 +41,27 @@ const Step3 = ({ formData, setFormData }) => {
     navigate('/create-store/step4');
   };
 
+  // New handler for select change
+  const handleSelectChange = (type, value) => {
+    if (type === 'currency') {
+      setCurrency(value);
+      setFormData({ ...formData, currency: value });
+      setIsSelectOpen(false); // Close the select after choosing
+    }
+  };
+
   return (
     <div className="container create-shop">
       <div className="header__create-shop">
         <h1 className="title-create__shop">Create your store</h1>
-        <p className="sub-title_details">Store details</p>
+        <p className="sub-title_details">Shop details</p>
         <ProgressBar currentStep={3} />
       </div>
 
       <div className="choose_type">
         <div className="container">
           <div className="input-group">
-            <label htmlFor="shop-logo">Shop logo</label>
+            <label htmlFor="shop-logo">Logo</label>
             <div className="shop_logo-load">
               {logo && (
                 <div className="logo-preview-container">
@@ -72,6 +84,21 @@ const Step3 = ({ formData, setFormData }) => {
                 +
               </label>
             </div>
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="currency">Currency</label>
+            <div className="custom-select" id="currency" onClick={() => setIsSelectOpen(!isSelectOpen)}>
+              <div className="select-selected">{currency}</div>
+              {isSelectOpen && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('currency', 'USD')}>USD</div>
+                  <div onClick={() => handleSelectChange('currency', 'EUR')}>EUR</div>
+                  <div onClick={() => handleSelectChange('currency', 'GBP')}>GBP</div>
+                </div>
+              )}
+            </div>
+            <i className="arrow-down"></i>
           </div>
 
           <div className="input-group">
@@ -100,8 +127,6 @@ const Step3 = ({ formData, setFormData }) => {
               }}
             />
           </div>
-
-        
         </div>
       </div>
 

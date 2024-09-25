@@ -4,7 +4,6 @@ import ProgressBar from '../ProgressBar';
 import './Step4.css';
 
 const Step4 = ({ formData, setFormData }) => {
-  const [currency, setCurrency] = useState(formData.currency || 'USD');
   const [paymentMethods, setPaymentMethods] = useState(formData.paymentMethods || 'Crypto, Bank cards');
   const [deliveryMethods, setDeliveryMethods] = useState(formData.deliveryMethods || 'FeedEx');
   const [email, setEmail] = useState(formData.email || '');
@@ -18,7 +17,6 @@ const Step4 = ({ formData, setFormData }) => {
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
     if (savedFormData) {
       setFormData(savedFormData);
-      setCurrency(savedFormData.currency || 'USD');
       setPaymentMethods(savedFormData.paymentMethods || 'Crypto, Bank cards');
       setDeliveryMethods(savedFormData.deliveryMethods || 'FeedEx');
       setEmail(savedFormData.email || '');
@@ -33,9 +31,6 @@ const Step4 = ({ formData, setFormData }) => {
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
 
     switch (type) {
-      case 'currency':
-        setCurrency(value);
-        break;
       case 'payment':
         setPaymentMethods(value);
         break;
@@ -86,53 +81,12 @@ const Step4 = ({ formData, setFormData }) => {
       <div className="choose_type">
         <div className="container type-of">
           {/* Currency Select */}
-          <div className="input-group">
-            <label htmlFor="currency">Currency</label>
-            <div className="custom-select" id="currency" onClick={() => setIsSelectOpen(isSelectOpen === 'currency' ? null : 'currency')}>
-              <div className="select-selected">{currency}</div>
-              {isSelectOpen === 'currency' && (
-                <div className="select-items">
-                  <div onClick={() => handleSelectChange('currency', 'USD')}>USD</div>
-                  <div onClick={() => handleSelectChange('currency', 'EUR')}>EUR</div>
-                  <div onClick={() => handleSelectChange('currency', 'GBP')}>GBP</div>
-                </div>
-              )}
-            </div>
-            <i className="arrow-down"></i>
-          </div>
+         
 
           {/* Payment Methods Select */}
-          <div className="input-group">
-            <label htmlFor="payment-methods">Payments</label>
-            <div className="custom-select" id="payment-methods" onClick={() => setIsSelectOpen(isSelectOpen === 'payment' ? null : 'payment')}>
-              <div className="select-selected">{paymentMethods}</div>
-              {isSelectOpen === 'payment' && (
-                <div className="select-items">
-                  <div onClick={() => handleSelectChange('payment', 'Crypto, Bank cards')}>Crypto, Bank cards</div>
-                  <div onClick={() => handleSelectChange('payment', 'PayPal')}>PayPal</div>
-                  <div onClick={() => handleSelectChange('payment', 'Stripe')}>Stripe</div>
-                </div>
-              )}
-            </div>
-            <i className="arrow-down"></i>
-          </div>
+        
 
-          {/* Delivery Methods Select */}
-          <div className="input-group">
-            <label htmlFor="delivery-methods">Delivery</label>
-            <div className="custom-select" id="delivery-methods" onClick={() => setIsSelectOpen(isSelectOpen === 'delivery' ? null : 'delivery')}>
-              <div className="select-selected">{deliveryMethods}</div>
-              {isSelectOpen === 'delivery' && (
-                <div className="select-items">
-                  <div onClick={() => handleSelectChange('delivery', 'FeedEx')}>FeedEx</div>
-                  <div onClick={() => handleSelectChange('delivery', 'DHL')}>DHL</div>
-                  <div onClick={() => handleSelectChange('delivery', 'UPS')}>UPS</div>
-                </div>
-              )}
-            </div>
-            <i className="arrow-down"></i>
-          </div>
-
+        
           {/* Email Input */}
           <div className="input-group">
             <label htmlFor="email">E-mail</label>

@@ -17,10 +17,7 @@ const Footer = ({ isDarkTheme }) => {
           <StoreIcon className="footer-icon" />
           <span className="footer-text">Store</span>
         </Link>
-        <Link to="/task
-        
-        
-        s" className={`footer-button ${isActive('/tasks') ? 'active' : ''}`}>
+        <Link to="/tasks" className={`footer-button ${isActive('/tasks') ? 'active' : ''}`}>
           <TasksIcon className="footer-icon" />
           <span className="footer-text">Tasks</span>
         </Link>

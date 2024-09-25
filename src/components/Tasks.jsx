@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stories from '../components/Stories/Stories';
 import StoreCard from '../components/StoreCard';
 import arrow from '../components/icons/day-sort.svg';
 import stores from './StoreData'; // Импорт по умолчанию
-import { HapticFeedback } from '@twa-dev/sdk'; // Импорт haptic feedback SDK
-
+import { initHapticFeedback } from '@telegram-apps/sdk'; // Correct import for initializing haptic feedback
 import './Tasks.css';
 
 const Tasks = ({ isDarkTheme }) => {
   const [filter, setFilter] = useState('Day');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [hapticFeedback, setHapticFeedback] = useState(null);
+
+  useEffect(() => {
+    const feedback = initHapticFeedback(); // Initialize haptic feedback
+    setHapticFeedback(feedback);
+  }, []);
 
   const toggleDropdown = () => {
+    if (hapticFeedback) {
+      hapticFeedback.impactOccurred('light'); // Trigger light impact feedback when toggling the dropdown
+    }
     setDropdownOpen(!dropdownOpen);
   };
 
@@ -20,11 +28,11 @@ const Tasks = ({ isDarkTheme }) => {
   };
 
   const handleFilterSelect = (filter) => {
+    if (hapticFeedback) {
+      hapticFeedback.impactOccurred('medium'); // Trigger medium impact feedback when selecting a filter
+    }
     setFilter(filter);
     closeDropdown();
-    
-    // Вызов haptic feedback при выборе фильтра
-    HapticFeedback.impactLight(); // Легкий тактильный отклик
   };
 
   return (

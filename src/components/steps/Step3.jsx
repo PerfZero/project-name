@@ -1,151 +1,136 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar';
 import { initHapticFeedback } from '@telegram-apps/sdk'; // Импорт haptic feedback
-import './Step4.css';
+import './Step3.css';
 
-const Step4 = ({ formData, setFormData }) => {
-  const [paymentMethods, setPaymentMethods] = useState(formData.paymentMethods || 'Crypto, Bank cards');
-  const [deliveryMethods, setDeliveryMethods] = useState(formData.deliveryMethods || 'FeedEx');
-  const [email, setEmail] = useState(formData.email || '');
-  const [phone, setPhone] = useState(formData.phone || '');
-  const [address, setAddress] = useState(formData.address || '');
+const Step3 = ({ formData, setFormData }) => {
+  const [storeName, setStoreName] = useState(formData.storeName || '');
+  const [currency, setCurrency] = useState(formData.currency || 'USD');
+  const [storeDescription, setStoreDescription] = useState(formData.storeDescription || '');
+  const [logo, setLogo] = useState(formData.logo || '');
+  const [fileKey, setFileKey] = useState(Date.now());
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
-  const hapticFeedback = initHapticFeedback(); // Инициализация haptic feedback
 
-  useEffect(() => {
-    const savedFormData = JSON.parse(localStorage.getItem('formData'));
-    if (savedFormData) {
-      setFormData(savedFormData);
-      setPaymentMethods(savedFormData.paymentMethods || 'Crypto, Bank cards');
-      setDeliveryMethods(savedFormData.deliveryMethods || 'FeedEx');
-      setEmail(savedFormData.email || '');
-      setPhone(savedFormData.phone || '');
-      setAddress(savedFormData.address || '');
+  // Инициализация haptic feedback
+  const hapticFeedback = initHapticFeedback();
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setLogo(reader.result);
+        setFormData({ ...formData, logo: reader.result });
+        hapticFeedback.selectionChanged(); // Haptic feedback при изменении логотипа
+      };
+      reader.readAsDataURL(file);
     }
-  }, [setFormData]);
-
-  const handleInputChange = (e, field) => {
-    const updatedFormData = { ...formData, [field]: e.target.value };
-    setFormData(updatedFormData);
-    localStorage.setItem('formData', JSON.stringify(updatedFormData));
-
-    switch (field) {
-      case 'email':
-        setEmail(e.target.value);
-        break;
-      case 'phone':
-        setPhone(e.target.value);
-        break;
-      case 'address':
-        setAddress(e.target.value);
-        break;
-      default:
-        break;
-    }
-    hapticFeedback.selectionChanged(); // Haptic feedback при изменении значения инпута
   };
 
-  const handleSelectChange = (type, value) => {
-    const updatedFormData = { ...formData, [type]: value };
-    setFormData(updatedFormData);
-    localStorage.setItem('formData', JSON.stringify(updatedFormData));
-
-    switch (type) {
-      case 'payment':
-        setPaymentMethods(value);
-        break;
-      case 'delivery':
-        setDeliveryMethods(value);
-        break;
-      default:
-        break;
+  const handleRemoveLogo = () => {
+    setLogo('');
+    setFormData({ ...formData, logo: '' });
+    setFileKey(Date.now());
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
-    setIsSelectOpen(false);
-    hapticFeedback.selectionChanged(); // Haptic feedback при изменении селекта
+    hapticFeedback.selectionChanged(); // Haptic feedback при удалении логотипа
   };
 
   const handleNext = () => {
-    hapticFeedback.notificationOccurred('success'); // Haptic feedback при нажатии на кнопку "Next"
-    navigate('/create-store/step5');
+    hapticFeedback.notificationOccurred('success'); // Haptic feedback при нажатии "Next"
+    navigate('/create-store/step4');
+  };
+
+  const handleSelectChange = (type, value) => {
+    if (type === 'currency') {
+      setCurrency(value);
+      setFormData({ ...formData, currency: value });
+      setIsSelectOpen(false);
+      hapticFeedback.selectionChanged(); // Haptic feedback при изменении валюты
+    }
   };
 
   return (
     <div className="container create-shop">
       <div className="header__create-shop">
         <h1 className="title-create__shop">Create your store</h1>
-        <p className="sub-title_details">Additional Details</p>
-        <ProgressBar currentStep={4} />
+        <p className="sub-title_details">Shop details</p>
+        <ProgressBar currentStep={3} />
       </div>
 
       <div className="choose_type">
-        <div className="container type-of">
-          {/* Email Input */}
+        <div className="container">
           <div className="input-group">
-            <label htmlFor="email">E-mail</label>
+            <label htmlFor="shop-logo">Logo</label>
+            <div className="shop_logo-load">
+              {logo && (
+                <div className="logo-preview-container">
+                  <img src={logo} alt="Shop Logo" className="logo-preview" />
+                  <button onClick={handleRemoveLogo} className="remove-logo-button">
+                    Remove Logo
+                  </button>
+                </div>
+              )}
+              <input
+                type="file"
+                id="shop-logo"
+                accept="image/*"
+                onChange={handleFileChange}
+                key={fileKey}
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+              />
+              <label htmlFor="shop-logo" className="upload-button">+</label>
+            </div>
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="currency">Currency</label>
+            <div className="custom-select" id="currency" onClick={() => setIsSelectOpen(!isSelectOpen)}>
+              <div className="select-selected">{currency}</div>
+              {isSelectOpen && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('currency', 'USD')}>USD</div>
+                  <div onClick={() => handleSelectChange('currency', 'EUR')}>EUR</div>
+                  <div onClick={() => handleSelectChange('currency', 'GBP')}>GBP</div>
+                </div>
+              )}
+            </div>
+            <i className="arrow-down"></i>
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="store-name">Name</label>
             <input
-              type="email"
-              id="email"
-              placeholder="Enter email address"
-              value={email}
-              onChange={(e) => handleInputChange(e, 'email')}
+              type="text"
+              id="store-name"
+              placeholder="Toy Seller"
+              value={storeName}
+              onChange={(e) => {
+                setStoreName(e.target.value);
+                setFormData({ ...formData, storeName: e.target.value });
+                hapticFeedback.selectionChanged(); // Haptic feedback при изменении имени магазина
+              }}
             />
           </div>
 
-          {/* Phone Input */}
           <div className="input-group">
-            <label htmlFor="phone">Phone</label>
-            <input
-              type="tel"
-              id="phone"
-              placeholder="Enter phone number"
-              value={phone}
-              onChange={(e) => handleInputChange(e, 'phone')}
-            />
-          </div>
-
-          {/* Address Input */}
-          <div className="input-group">
-            <label htmlFor="address">Address</label>
+            <label htmlFor="store-description">Description</label>
             <textarea
-              id="address"
-              placeholder="Enter address"
-              value={address}
-              onChange={(e) => handleInputChange(e, 'address')}
+              id="store-description"
+              placeholder="Description"
+              value={storeDescription}
+              onChange={(e) => {
+                setStoreDescription(e.target.value);
+                setFormData({ ...formData, storeDescription: e.target.value });
+                hapticFeedback.selectionChanged(); // Haptic feedback при изменении описания
+              }}
             />
-          </div>
-
-          {/* Payment and Delivery Methods */}
-          <div className="input-group">
-            <label htmlFor="payment-method">Payment Method</label>
-            <div className="custom-select" id="payment-method" onClick={() => setIsSelectOpen(!isSelectOpen)}>
-              <div className="select-selected">{paymentMethods}</div>
-              {isSelectOpen && (
-                <div className="select-items">
-                  <div onClick={() => handleSelectChange('payment', 'Crypto, Bank cards')}>Crypto, Bank cards</div>
-                  <div onClick={() => handleSelectChange('payment', 'PayPal')}>PayPal</div>
-                  <div onClick={() => handleSelectChange('payment', 'Wire Transfer')}>Wire Transfer</div>
-                </div>
-              )}
-            </div>
-            <i className="arrow-down"></i>
-          </div>
-
-          <div className="input-group">
-            <label htmlFor="delivery-method">Delivery Method</label>
-            <div className="custom-select" id="delivery-method" onClick={() => setIsSelectOpen(!isSelectOpen)}>
-              <div className="select-selected">{deliveryMethods}</div>
-              {isSelectOpen && (
-                <div className="select-items">
-                  <div onClick={() => handleSelectChange('delivery', 'FeedEx')}>FeedEx</div>
-                  <div onClick={() => handleSelectChange('delivery', 'DHL')}>DHL</div>
-                  <div onClick={() => handleSelectChange('delivery', 'UPS')}>UPS</div>
-                </div>
-              )}
-            </div>
-            <i className="arrow-down"></i>
           </div>
         </div>
       </div>
@@ -153,9 +138,9 @@ const Step4 = ({ formData, setFormData }) => {
       <div className="footer add-item_btn">
         <div className="contents">
           <button
-            className={`btn btn-catalog ${!email || !phone || !address ? 'disabled' : ''}`}
+            className={`btn btn-catalog ${!storeName || !storeDescription ? 'disabled' : ''}`}
             onClick={handleNext}
-            disabled={!email || !phone || !address}
+            disabled={!storeName || !storeDescription}
           >
             Next
           </button>
@@ -165,4 +150,4 @@ const Step4 = ({ formData, setFormData }) => {
   );
 };
 
-export default Step4;
+export default Step3;

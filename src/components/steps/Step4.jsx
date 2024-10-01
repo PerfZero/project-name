@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar';
-import './Step4.css';
 import { initHapticFeedback } from '@telegram-apps/sdk'; // Импорт haptic feedback
+import './Step4.css';
 
 const Step4 = ({ formData, setFormData }) => {
   const [paymentMethods, setPaymentMethods] = useState(formData.paymentMethods || 'Crypto, Bank cards');
@@ -10,9 +10,10 @@ const Step4 = ({ formData, setFormData }) => {
   const [email, setEmail] = useState(formData.email || '');
   const [phone, setPhone] = useState(formData.phone || '');
   const [address, setAddress] = useState(formData.address || '');
+  const [isSelectOpen, setIsSelectOpen] = useState(false);
 
-  const [isSelectOpen, setIsSelectOpen] = useState(null);
   const navigate = useNavigate();
+  const hapticFeedback = initHapticFeedback(); // Инициализация haptic feedback
 
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
@@ -25,28 +26,6 @@ const Step4 = ({ formData, setFormData }) => {
       setAddress(savedFormData.address || '');
     }
   }, [setFormData]);
-
-  const handleSelectChange = (type, value) => {
-    // Вызов haptic feedback при выборе опции
-    initHapticFeedback();
-
-    const updatedFormData = { ...formData, [type]: value };
-    setFormData(updatedFormData);
-    localStorage.setItem('formData', JSON.stringify(updatedFormData));
-
-    switch (type) {
-      case 'payment':
-        setPaymentMethods(value);
-        break;
-      case 'delivery':
-        setDeliveryMethods(value);
-        break;
-      default:
-        break;
-    }
-
-    setIsSelectOpen(null);
-  };
 
   const handleInputChange = (e, field) => {
     const updatedFormData = { ...formData, [field]: e.target.value };
@@ -66,13 +45,30 @@ const Step4 = ({ formData, setFormData }) => {
       default:
         break;
     }
+    hapticFeedback.selectionChanged(); // Haptic feedback при изменении значения инпута
+  };
+
+  const handleSelectChange = (type, value) => {
+    const updatedFormData = { ...formData, [type]: value };
+    setFormData(updatedFormData);
+    localStorage.setItem('formData', JSON.stringify(updatedFormData));
+
+    switch (type) {
+      case 'payment':
+        setPaymentMethods(value);
+        break;
+      case 'delivery':
+        setDeliveryMethods(value);
+        break;
+      default:
+        break;
+    }
+    setIsSelectOpen(false);
+    hapticFeedback.selectionChanged(); // Haptic feedback при изменении селекта
   };
 
   const handleNext = () => {
-    // Вызов haptic feedback при нажатии на кнопку
-    initHapticFeedback();
-
-    console.log('Shop created with the following data:', formData);
+    hapticFeedback.notificationOccurred('success'); // Haptic feedback при нажатии на кнопку "Next"
     navigate('/create-store/step5');
   };
 
@@ -120,6 +116,37 @@ const Step4 = ({ formData, setFormData }) => {
               onChange={(e) => handleInputChange(e, 'address')}
             />
           </div>
+
+          {/* Payment and Delivery Methods */}
+          <div className="input-group">
+            <label htmlFor="payment-method">Payment Method</label>
+            <div className="custom-select" id="payment-method" onClick={() => setIsSelectOpen(!isSelectOpen)}>
+              <div className="select-selected">{paymentMethods}</div>
+              {isSelectOpen && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('payment', 'Crypto, Bank cards')}>Crypto, Bank cards</div>
+                  <div onClick={() => handleSelectChange('payment', 'PayPal')}>PayPal</div>
+                  <div onClick={() => handleSelectChange('payment', 'Wire Transfer')}>Wire Transfer</div>
+                </div>
+              )}
+            </div>
+            <i className="arrow-down"></i>
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="delivery-method">Delivery Method</label>
+            <div className="custom-select" id="delivery-method" onClick={() => setIsSelectOpen(!isSelectOpen)}>
+              <div className="select-selected">{deliveryMethods}</div>
+              {isSelectOpen && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('delivery', 'FeedEx')}>FeedEx</div>
+                  <div onClick={() => handleSelectChange('delivery', 'DHL')}>DHL</div>
+                  <div onClick={() => handleSelectChange('delivery', 'UPS')}>UPS</div>
+                </div>
+              )}
+            </div>
+            <i className="arrow-down"></i>
+          </div>
         </div>
       </div>
 
@@ -130,7 +157,7 @@ const Step4 = ({ formData, setFormData }) => {
             onClick={handleNext}
             disabled={!email || !phone || !address}
           >
-            Create Shop
+            Next
           </button>
         </div>
       </div>

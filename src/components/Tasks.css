@@ -25,6 +25,7 @@
     color: #ff4081;
     cursor: pointer;
     display: flex;
+    gap: 5px;
     align-items: center;
 }
 
@@ -46,7 +47,7 @@
     position: fixed;
     min-width: 160px;
     width: 95%;
-    bottom: 10%;
+    bottom: 1%;
     left: 12px;
     text-align: center;
     z-index: 40;

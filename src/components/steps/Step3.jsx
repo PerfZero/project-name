@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar';
+import { initHapticFeedback } from '@telegram-apps/sdk'; // Импорт haptic feedback
 import './Step3.css';
 
 const Step3 = ({ formData, setFormData }) => {
@@ -9,12 +10,13 @@ const Step3 = ({ formData, setFormData }) => {
   const [storeDescription, setStoreDescription] = useState(formData.storeDescription || '');
   const [logo, setLogo] = useState(formData.logo || '');
   const [fileKey, setFileKey] = useState(Date.now());
-  
-  // New state for managing the select dropdown
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+
+  // Инициализация haptic feedback
+  const hapticFeedback = initHapticFeedback();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -23,6 +25,7 @@ const Step3 = ({ formData, setFormData }) => {
       reader.onloadend = () => {
         setLogo(reader.result);
         setFormData({ ...formData, logo: reader.result });
+        hapticFeedback.selectionChanged(); // Haptic feedback при изменении логотипа
       };
       reader.readAsDataURL(file);
     }
@@ -35,18 +38,20 @@ const Step3 = ({ formData, setFormData }) => {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    hapticFeedback.selectionChanged(); // Haptic feedback при удалении логотипа
   };
 
   const handleNext = () => {
+    hapticFeedback.notificationOccurred('success'); // Haptic feedback при нажатии "Next"
     navigate('/create-store/step4');
   };
 
-  // New handler for select change
   const handleSelectChange = (type, value) => {
     if (type === 'currency') {
       setCurrency(value);
       setFormData({ ...formData, currency: value });
-      setIsSelectOpen(false); // Close the select after choosing
+      setIsSelectOpen(false);
+      hapticFeedback.selectionChanged(); // Haptic feedback при изменении валюты
     }
   };
 
@@ -80,9 +85,7 @@ const Step3 = ({ formData, setFormData }) => {
                 ref={fileInputRef}
                 style={{ display: 'none' }}
               />
-              <label htmlFor="shop-logo" className="upload-button">
-                +
-              </label>
+              <label htmlFor="shop-logo" className="upload-button">+</label>
             </div>
           </div>
 
@@ -111,6 +114,7 @@ const Step3 = ({ formData, setFormData }) => {
               onChange={(e) => {
                 setStoreName(e.target.value);
                 setFormData({ ...formData, storeName: e.target.value });
+                hapticFeedback.selectionChanged(); // Haptic feedback при изменении имени магазина
               }}
             />
           </div>
@@ -124,6 +128,7 @@ const Step3 = ({ formData, setFormData }) => {
               onChange={(e) => {
                 setStoreDescription(e.target.value);
                 setFormData({ ...formData, storeDescription: e.target.value });
+                hapticFeedback.selectionChanged(); // Haptic feedback при изменении описания
               }}
             />
           </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar';
 import './Step4.css';
+import { initHapticFeedback } from '@telegram-apps/sdk'; // Импорт haptic feedback
 
 const Step4 = ({ formData, setFormData }) => {
   const [paymentMethods, setPaymentMethods] = useState(formData.paymentMethods || 'Crypto, Bank cards');
@@ -26,6 +27,9 @@ const Step4 = ({ formData, setFormData }) => {
   }, [setFormData]);
 
   const handleSelectChange = (type, value) => {
+    // Вызов haptic feedback при выборе опции
+    initHapticFeedback();
+
     const updatedFormData = { ...formData, [type]: value };
     setFormData(updatedFormData);
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
@@ -41,7 +45,6 @@ const Step4 = ({ formData, setFormData }) => {
         break;
     }
 
-    // Закрываем селект после выбора
     setIsSelectOpen(null);
   };
 
@@ -66,6 +69,9 @@ const Step4 = ({ formData, setFormData }) => {
   };
 
   const handleNext = () => {
+    // Вызов haptic feedback при нажатии на кнопку
+    initHapticFeedback();
+
     console.log('Shop created with the following data:', formData);
     navigate('/create-store/step5');
   };
@@ -80,13 +86,6 @@ const Step4 = ({ formData, setFormData }) => {
 
       <div className="choose_type">
         <div className="container type-of">
-          {/* Currency Select */}
-         
-
-          {/* Payment Methods Select */}
-        
-
-        
           {/* Email Input */}
           <div className="input-group">
             <label htmlFor="email">E-mail</label>

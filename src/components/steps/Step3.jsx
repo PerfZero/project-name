@@ -9,6 +9,8 @@ const Step3 = ({ formData, setFormData }) => {
   const [currency, setCurrency] = useState(formData.currency || 'USD');
   const [storeDescription, setStoreDescription] = useState(formData.storeDescription || '');
   const [logo, setLogo] = useState(formData.logo || '');
+  const [paymentMethod, setPaymentMethod] = useState(formData.paymentMethod || '');
+  const [deliveryMethod, setDeliveryMethod] = useState(formData.deliveryMethod || '');
   const [fileKey, setFileKey] = useState(Date.now());
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
@@ -53,6 +55,18 @@ const Step3 = ({ formData, setFormData }) => {
       setIsSelectOpen(false);
       hapticFeedback.selectionChanged(); // Haptic feedback при изменении валюты
     }
+  };
+
+  const handlePaymentMethodChange = (e) => {
+    setPaymentMethod(e.target.value);
+    setFormData({ ...formData, paymentMethod: e.target.value });
+    hapticFeedback.selectionChanged(); // Haptic feedback при изменении метода оплаты
+  };
+
+  const handleDeliveryMethodChange = (e) => {
+    setDeliveryMethod(e.target.value);
+    setFormData({ ...formData, deliveryMethod: e.target.value });
+    hapticFeedback.selectionChanged(); // Haptic feedback при изменении метода доставки
   };
 
   return (
@@ -132,19 +146,41 @@ const Step3 = ({ formData, setFormData }) => {
               }}
             />
           </div>
+
+          <div className="input-group">
+            <label htmlFor="payment-method">Payment Method</label>
+            <select
+              id="payment-method"
+              value={paymentMethod}
+              onChange={handlePaymentMethodChange}
+            >
+              <option value="">Select Payment Method</option>
+              <option value="credit-card">Credit Card</option>
+              <option value="paypal">PayPal</option>
+              <option value="cash">Cash on Delivery</option>
+            </select>
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="delivery-method">Delivery Method</label>
+            <select
+              id="delivery-method"
+              value={deliveryMethod}
+              onChange={handleDeliveryMethodChange}
+            >
+              <option value="">Select Delivery Method</option>
+              <option value="standard">Standard Delivery</option>
+              <option value="express">Express Delivery</option>
+              <option value="pickup">Pickup</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <div className="footer add-item_btn">
-        <div className="contents">
-          <button
-            className={`btn btn-catalog ${!storeName || !storeDescription ? 'disabled' : ''}`}
-            onClick={handleNext}
-            disabled={!storeName || !storeDescription}
-          >
-            Next
-          </button>
-        </div>
+      <div className="button-row">
+        <button className="create-shop_button-next" onClick={handleNext}>
+          Next
+        </button>
       </div>
     </div>
   );

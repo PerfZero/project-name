@@ -13,7 +13,8 @@ const Step3 = ({ formData, setFormData }) => {
   const [deliveryMethod, setDeliveryMethod] = useState(formData.deliveryMethod || '');
   const [fileKey, setFileKey] = useState(Date.now());
   const [isSelectOpen, setIsSelectOpen] = useState(false);
-
+  const [isCurrencySelectOpen, setIsCurrencySelectOpen] = useState(false);
+  
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
@@ -52,21 +53,17 @@ const Step3 = ({ formData, setFormData }) => {
     if (type === 'currency') {
       setCurrency(value);
       setFormData({ ...formData, currency: value });
-      setIsSelectOpen(false);
+      setIsCurrencySelectOpen(false);
       hapticFeedback.selectionChanged(); // Haptic feedback при изменении валюты
+    } else if (type === 'paymentMethod') {
+      setPaymentMethod(value);
+      setFormData({ ...formData, paymentMethod: value });
+      hapticFeedback.selectionChanged(); // Haptic feedback при изменении метода оплаты
+    } else if (type === 'deliveryMethod') {
+      setDeliveryMethod(value);
+      setFormData({ ...formData, deliveryMethod: value });
+      hapticFeedback.selectionChanged(); // Haptic feedback при изменении метода доставки
     }
-  };
-
-  const handlePaymentMethodChange = (e) => {
-    setPaymentMethod(e.target.value);
-    setFormData({ ...formData, paymentMethod: e.target.value });
-    hapticFeedback.selectionChanged(); // Haptic feedback при изменении метода оплаты
-  };
-
-  const handleDeliveryMethodChange = (e) => {
-    setDeliveryMethod(e.target.value);
-    setFormData({ ...formData, deliveryMethod: e.target.value });
-    hapticFeedback.selectionChanged(); // Haptic feedback при изменении метода доставки
   };
 
   return (
@@ -105,9 +102,9 @@ const Step3 = ({ formData, setFormData }) => {
 
           <div className="input-group">
             <label htmlFor="currency">Currency</label>
-            <div className="custom-select" id="currency" onClick={() => setIsSelectOpen(!isSelectOpen)}>
+            <div className="custom-select" id="currency" onClick={() => setIsCurrencySelectOpen(!isCurrencySelectOpen)}>
               <div className="select-selected">{currency}</div>
-              {isSelectOpen && (
+              {isCurrencySelectOpen && (
                 <div className="select-items">
                   <div onClick={() => handleSelectChange('currency', 'USD')}>USD</div>
                   <div onClick={() => handleSelectChange('currency', 'EUR')}>EUR</div>
@@ -149,38 +146,47 @@ const Step3 = ({ formData, setFormData }) => {
 
           <div className="input-group">
             <label htmlFor="payment-method">Payment Method</label>
-            <select
-              id="payment-method"
-              value={paymentMethod}
-              onChange={handlePaymentMethodChange}
-            >
-              <option value="">Select Payment Method</option>
-              <option value="credit-card">Credit Card</option>
-              <option value="paypal">PayPal</option>
-              <option value="cash">Cash on Delivery</option>
-            </select>
+            <div className="custom-select" id="payment-method" onClick={() => setIsSelectOpen(!isSelectOpen)}>
+              <div className="select-selected">{paymentMethod || 'Select Payment Method'}</div>
+              {isSelectOpen && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('paymentMethod', 'Credit Card')}>Credit Card</div>
+                  <div onClick={() => handleSelectChange('paymentMethod', 'PayPal')}>PayPal</div>
+                  <div onClick={() => handleSelectChange('paymentMethod', 'Cash on Delivery')}>Cash on Delivery</div>
+                </div>
+              )}
+            </div>
+            <i className="arrow-down"></i>
           </div>
 
           <div className="input-group">
             <label htmlFor="delivery-method">Delivery Method</label>
-            <select
-              id="delivery-method"
-              value={deliveryMethod}
-              onChange={handleDeliveryMethodChange}
-            >
-              <option value="">Select Delivery Method</option>
-              <option value="standard">Standard Delivery</option>
-              <option value="express">Express Delivery</option>
-              <option value="pickup">Pickup</option>
-            </select>
+            <div className="custom-select" id="delivery-method" onClick={() => setIsSelectOpen(!isSelectOpen)}>
+              <div className="select-selected">{deliveryMethod || 'Select Delivery Method'}</div>
+              {isSelectOpen && (
+                <div className="select-items">
+                  <div onClick={() => handleSelectChange('deliveryMethod', 'Standard Delivery')}>Standard Delivery</div>
+                  <div onClick={() => handleSelectChange('deliveryMethod', 'Express Delivery')}>Express Delivery</div>
+                  <div onClick={() => handleSelectChange('deliveryMethod', 'Pickup')}>Pickup</div>
+                </div>
+              )}
+            </div>
+            <i className="arrow-down"></i>
           </div>
+
         </div>
       </div>
 
-      <div className="button-row">
-        <button className="create-shop_button-next" onClick={handleNext}>
-          Next
-        </button>
+      <div className="footer add-item_btn">
+        <div className="contents">
+          <button
+            className={`btn btn-catalog ${!storeName || !storeDescription ? 'disabled' : ''}`}
+            onClick={handleNext}
+            disabled={!storeName || !storeDescription}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

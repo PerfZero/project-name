@@ -13,3 +13,20 @@
 .minus-stat {
     color: #a94040;
 }
+
+.rs-picker-input-group {
+    display: none;
+}
+
+.rs-picker-popup.rs-picker-popup-daterange {
+    left: 21px !important;
+    padding: 0;
+}
+
+.rs-picker-daterange-predefined {
+    display: none;
+}
+
+.rs-picker-daterange-content{
+    width: 90vw;
+}

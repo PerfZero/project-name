@@ -6,6 +6,7 @@ import Catalog from './Catalog';
 import Analytics from './Analytics';
 import Settings from './Settings';
 import stores from './StoreData'; // Импорт по умолчанию
+import PaymentSystems from './PaymentSystems';
 
 const StoreDetails = () => {
   const { storeId } = useParams();
@@ -32,40 +33,48 @@ const StoreDetails = () => {
         </div>
         {/* Меню с переключателями */}
         <div className="store-menu">
-          <NavLink 
-            to="orders" 
-            className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
-          >
-            Orders
-          </NavLink>
-          <NavLink 
-            to="catalog" 
-            className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
-          >
-            Catalog
-          </NavLink>
-          <NavLink 
-            to="analytics" 
-            className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
-          >
-            Analytics
-          </NavLink>
-          <NavLink 
-            to="settings" 
-            className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
-          >
-            Settings
-          </NavLink>
-        </div>
+  <NavLink 
+    to="orders" 
+    className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
+  >
+    Orders
+  </NavLink>
+  <NavLink 
+    to="Catalog" 
+    className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
+  >
+    Filters
+  </NavLink>
+  <NavLink 
+    to="analytics" 
+    className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
+  >
+    Analytics
+  </NavLink>
+  <NavLink 
+    to="settings" 
+    className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
+  >
+    Settings
+  </NavLink>
+  <NavLink 
+    to="payment-systems" 
+    className={({ isActive }) => isActive ? "store-menu_item activet" : "store-menu_item"}
+  >
+    Payment Systems
+  </NavLink>
+</div>
       </div>
 
       {/* Вложенные маршруты для страниц переключателей */}
       <div className="store-content">
         <Routes>
           <Route path="orders" element={<Orders />} />
-          <Route path="catalog" element={<Catalog />} />
+          <Route path="Catalog" element={<Catalog />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="payment-systems" element={<PaymentSystems />} />
+
         </Routes>
       </div>
     </div>

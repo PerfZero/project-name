@@ -7,6 +7,7 @@
   import Footer from './components/Footer';
   import CreateStore from './components/CreateStore';
   import TelegramBackButton from './components/TelegramBackButton'; // Импортируем компонент
+  
 
   const App = () => {
     const [isDarkTheme, setIsDarkTheme] = useState(false);

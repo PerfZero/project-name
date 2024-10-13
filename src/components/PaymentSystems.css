@@ -1,0 +1,40 @@
+.payment-option{
+    margin-bottom: 10px;
+    padding: 0;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-option label {
+    padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 5px;
+}
+
+.payment-option  label::after {
+    content: url(./img/arrow-rgth.svg);
+    padding-left: 15px;
+}
+
+.payment-option  input {
+  flex: 1;
+}
+.payment-option input[type="radio"] {
+    appearance: none;
+    transform: scale(0.9);
+    padding: 10px 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #c7c7cc;
+    border-radius: 50%;
+    margin-right: 15px;
+    outline: none;
+    position: absolute;
+    left: -43px;
+    display: none;
+}

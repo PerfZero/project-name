@@ -3,7 +3,7 @@ const stores = [
   {
     id: '1',
     name: 'Toy Seller',
-    username: '@ToySellerBot',
+    username: 'ToySellerBot',
     revenue: '$27,392.00',
     orders: 64,
     avgBill: '$428.00',
@@ -14,7 +14,7 @@ const stores = [
   {
     id: '2',
     name: 'Book Seller',
-    username: '@BookSellerBot',
+    username: 'BookSellerBot',
     revenue: '$18,000.00',
     orders: 45,
     avgBill: '$400.00',

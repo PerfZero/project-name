@@ -13,7 +13,9 @@ const StoreCard = ({ store }) => {
           <img src={Store} alt="Store Logo" className="store-logo" />
           <div>
             {/* Используем store.name для отображения имени магазина */}
-            <div className="store-name">{store.name}</div>
+            <a href={`/store/${store.id}/orders`} className="store-name">
+              {store.name}
+            </a>
             <a href={`https://t.me/${store.username}`}>
               <div className="store-username">@{store.username}</div> {/* Добавлен "@" перед username */}
             </a>

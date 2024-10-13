@@ -1,178 +1,140 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Step5.css';
+import './Settings.css'; // Импортируйте файл стилей
 
-const Step5 = () => {
-  const [activeTab, setActiveTab] = useState('addSingle');
-  const [uploadedFiles, setUploadedFiles] = useState([]);
-  const navigate = useNavigate();
-
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
-
-  const handleAddItems = () => {
-    console.log('Add item logic here');
-    navigate('/');
-  };
-
-  // Handle photo uploads
-  const handlePhotoUpload = (event) => {
-    const files = Array.from(event.target.files);
-    setUploadedFiles(prevFiles => [...prevFiles, ...files]);
-  };
+const Settings = () => {
+  const [merchantType, setMerchantType] = useState('business');
+  const [storeType, setStoreType] = useState('Store');
+  const [theme, setTheme] = useState('Default');
+  const [language, setLanguage] = useState('English');
+  const [currency, setCurrency] = useState('USD');
+  const [poweredBy, setPoweredBy] = useState(false);
 
   return (
-    <div className="container container-order">
-      <div className="store-header order">
-        <h3 className="add-item-title">Add item</h3>
-        <div className="store-menu add-item-menu">
-          <div
-            className={`store-menu_item ${activeTab === 'addSingle' ? 'activ' : ''}`}
-            onClick={() => handleTabChange('addSingle')}
-          >
-            Add single Item
+    <div className="container setting-wrap">
+      <div className="container_wrap">
+        {/* Seller details */}
+        <div className="input-group">
+          <label htmlFor="merchant-type">Merchant</label>
+          <div className="custom-select" id="merchant-type">
+            <div className="select-selected" onClick={() => document.getElementById('merchant-type-items').classList.toggle('select-hide')}>
+              {merchantType}
+            </div>
+            <div className="select-items select-hide" id="merchant-type-items">
+              {['business', 'personal'].map(option => (
+                <div key={option} onClick={() => setMerchantType(option)}>{option}</div>
+              ))}
+            </div>
+            <i className="arrow-down"></i>
           </div>
-          <div
-            className={`store-menu_item ${activeTab === 'upload' ? 'activ' : ''}`}
-            onClick={() => handleTabChange('upload')}
-          >
-            Upload items
+        </div>
+
+        {/* Shop settings */}
+        <div className="input-group">
+          <label htmlFor="store-type">Type</label>
+          <div className="custom-select" id="store-type">
+            <div className="select-selected" onClick={() => document.getElementById('store-type-items').classList.toggle('select-hide')}>
+              {storeType}
+            </div>
+            <div className="select-items select-hide" id="store-type-items">
+              {['Store', 'Booking', 'Delivery'].map(option => (
+                <div key={option} onClick={() => setStoreType(option)}>{option}</div>
+              ))}
+            </div>
+            <i className="arrow-down"></i>
           </div>
+        </div>
+        <div className="input-group">
+          <label htmlFor="theme">Theme</label>
+          <div className="custom-select" id="theme">
+            <div className="select-selected" onClick={() => document.getElementById('theme-items').classList.toggle('select-hide')}>
+              {theme}
+            </div>
+            <div className="select-items select-hide" id="theme-items">
+              {['Default', 'Dark', 'Light'].map(option => (
+                <div key={option} onClick={() => setTheme(option)}>{option}</div>
+              ))}
+            </div>
+            <i className="arrow-down"></i>
+          </div>
+        </div>
+        <div className="input-group">
+          <label htmlFor="language">Language</label>
+          <div className="custom-select" id="language">
+            <div className="select-selected" onClick={() => document.getElementById('language-items').classList.toggle('select-hide')}>
+              {language}
+            </div>
+            <div className="select-items select-hide" id="language-items">
+              {['English', 'Spanish', 'French'].map(option => (
+                <div key={option} onClick={() => setLanguage(option)}>{option}</div>
+              ))}
+            </div>
+            <i className="arrow-down"></i>
+          </div>
+        </div>
+        <div className="input-group">
+          <label htmlFor="bot-api">Bot API</label>
+          <input type="text" id="bot-api" placeholder="Enter bot API token" />
+        </div>
+
+        {/* Shop details */}
+        <div className="input-group">
+          <label htmlFor="shop-logo">Logo</label>
+          <div className="shop_logo-load"></div>
+        </div>
+        <div className="input-group">
+          <label htmlFor="store-name">Name</label>
+          <input type="text" id="store-name" placeholder="Toy Seller" />
+        </div>
+        <div className="input-group">
+          <label htmlFor="store-description">Description</label>
+          <textarea id="store-description" placeholder="Description"></textarea>
+        </div>
+        <div className="input-group">
+          <label htmlFor="currency">Currency</label>
+          <div className="custom-select" id="currency">
+            <div className="select-selected" onClick={() => document.getElementById('currency-items').classList.toggle('select-hide')}>
+              {currency}
+            </div>
+            <div className="select-items select-hide" id="currency-items">
+              {['USD', 'EUR', 'GBP'].map(option => (
+                <div key={option} onClick={() => setCurrency(option)}>{option}</div>
+              ))}
+            </div>
+            <i className="arrow-down"></i>
+          </div>
+        </div>
+
+        {/* Additional details */}
+        <div className="input-group">
+          <label htmlFor="email">E-mail</label>
+          <input type="email" id="email" placeholder="Enter email address" />
+        </div>
+        <div className="input-group">
+          <label htmlFor="phone">Phone</label>
+          <input type="tel" id="phone" placeholder="Enter phone number" />
+        </div>
+        <div className="input-group">
+          <label htmlFor="address">Address</label>
+          <textarea id="address" placeholder="Enter address"></textarea>
+        </div>
+
+        {/* Powered by SPRUTON */}
+        <div className="input-group check_box-cpa">
+          <div className="cpa">Powered by SPRUTON</div>
+          <label className="switch">
+            <input type="checkbox" checked={poweredBy} onChange={() => setPoweredBy(!poweredBy)} />
+            <span className="slider"></span>
+          </label>
         </div>
       </div>
 
-      <div className="order-contents item-menu-order">
-        {activeTab === 'addSingle' ? (
-          <div className="container add-item-cont">
-            {/* Add Single Item Form */}
-            <div className="input-group">
-              <label htmlFor="Item_name">Item name</label>
-              <input
-                type="text"
-                id="Item_name"
-                placeholder="Toy Seller"
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="category">Category</label>
-              <div className="custom-select" id="category">
-                <div className="select-selected">Cars</div>
-                <div className="select-items select-hide">
-                  <div>Cars1</div>
-                  <div>Cars2</div>
-                </div>
-              </div>
-              <i className="arrow-down"></i>
-            </div>
-            <div className="input-group">
-              <label htmlFor="Quantity">Quantity</label>
-              <input
-                type="number"
-                id="Quantity"
-                placeholder="36"
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="Price">Price</label>
-              <input
-                type="number"
-                id="Price"
-                placeholder="280"
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="SKU">SKU</label>
-              <input
-                type="text"
-                id="SKU"
-                placeholder="SKU"
-                disabled
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="store-description">Description</label>
-              <textarea
-                id="store-description"
-                placeholder="Description"
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="item-photos">Item photos</label>
-              <div className="photo-upload-group">
-                {[0, 1, 2, 3].map((index) => (
-                  <div key={index} className="photo-upload">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      style={{ display: 'none' }}
-                      id={`photo${index}`}
-                    />
-                    <label htmlFor={`photo${index}`} className="upload-button">
-                      <div className="image-placeholder">+</div>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="input-group">
-              <label htmlFor="item-thumbnail">Item thumbnail</label>
-              <input
-                type="file"
-                id="item-thumbnail"
-                accept="image/*"
-                style={{ display: 'none' }}
-              />
-              <label htmlFor="item-thumbnail" className="upload-button">
-                <div className="image-placeholder">+</div>
-              </label>
-            </div>
-            <div className="input-group">
-              <label htmlFor="YouTube">YouTube link</label>
-              <input
-                type="text"
-                id="YouTube"
-                placeholder="https://t.me/toyseller"
-              />
-            </div>
-            <div className="input-group check_box-cpa">
-              <div className="cpa">CPA</div>
-              <label className="switch">
-                <input type="checkbox" />
-                <span className="slider"></span>
-              </label>
-            </div>
-            <div className="footer add-item_btn" style={{ padding: '10px 0' }}>
-              <div className="contents">
-                <button
-                  className="btn btn-catalog"
-                  onClick={handleAddItems}
-                >
-                  Add items
-                </button>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="upload-items-content">
-             <div className="input-group">
-              <label htmlFor="item-thumbnail">Item thumbnail</label>
-              <input
-                type="file"
-                id="item-thumbnail"
-                accept="image/*"
-                style={{ display: 'none' }}
-              />
-              <label htmlFor="item-thumbnail" className="upload-button">
-                <div className="image-placeholder">+</div>
-              </label>
-            </div>
-
-          </div>
-        )}
+      <div className="footers fix-footer">
+        <div className="contents">
+          <div className="btn btn-catalog">Save</div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Step5;
+export default Settings;

@@ -1,0 +1,25 @@
+.success-title , .success-message{
+    text-align: center;
+}
+
+.success-content{
+    padding: 0 20px;
+    text-align: center;
+
+}
+
+
+.success-message{
+    margin-bottom: 20px;
+}
+
+.success-messages{
+    text-align: left !important;
+    margin-bottom: 20px;
+}
+
+.success-image{
+    margin-bottom: -41px;
+    width: 70%;
+    padding-top: 30%;
+}

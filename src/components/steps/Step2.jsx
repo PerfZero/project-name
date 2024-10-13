@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar';
-import { initHapticFeedback } from '@telegram-apps/sdk'; // Import haptic feedback initialization
+// import { initHapticFeedback } from '@telegram-apps/sdk'; // Import haptic feedback initialization
 import './Step2.css';
 
 const Step2 = ({ formData, setFormData }) => {
@@ -17,7 +17,7 @@ const Step2 = ({ formData, setFormData }) => {
   const navigate = useNavigate();
   
   // Initialize haptic feedback
-  const hapticFeedback = initHapticFeedback();
+  // const hapticFeedback = initHapticFeedback();
 
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
@@ -52,14 +52,14 @@ const Step2 = ({ formData, setFormData }) => {
     setSelectedStoreType(e.target.value);
     setFormData(updatedFormData);
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
-    hapticFeedback.impactOccurred('medium'); // Trigger haptic feedback on store type change
+    // hapticFeedback.impactOccurred('medium'); // Trigger haptic feedback on store type change
   };
 
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.textContent);
     setFormData({ ...formData, language: e.target.textContent });
     setIsLanguageSelectOpen(false);
-    hapticFeedback.selectionChanged(); // Trigger haptic feedback on language change
+    // hapticFeedback.selectionChanged(); // Trigger haptic feedback on language change
   };
 
   const handleThemeChange = (e) => {
@@ -68,7 +68,7 @@ const Step2 = ({ formData, setFormData }) => {
     setFormData(updatedFormData);
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
     setIsThemeSelectOpen(false);
-    hapticFeedback.selectionChanged(); // Trigger haptic feedback on theme change
+    // hapticFeedback.selectionChanged(); // Trigger haptic feedback on theme change
   };
 
   const handleSelectToggle = (type) => {
@@ -82,7 +82,7 @@ const Step2 = ({ formData, setFormData }) => {
   };
 
   const handleNext = () => {
-    hapticFeedback.notificationOccurred('success'); // Trigger haptic feedback on next button click
+    // hapticFeedback.notificationOccurred('success'); // Trigger haptic feedback on next button click
     navigate('/create-store/step3');
   };
 
@@ -156,24 +156,24 @@ const Step2 = ({ formData, setFormData }) => {
             </div>
 
             <div className="input-group">
-  <label htmlFor="bot">Bot API</label>
-  <input
-    type="text"
-    id="bot" // Добавлен id для соответствия с htmlFor
-    placeholder="mnjDN_22nDU-WEJKCX..."
-    value={botAPI}
-    onChange={(e) => {
-      const updatedFormData = { ...formData, botAPI: e.target.value };
-      setBotAPI(e.target.value);
-      setFormData(updatedFormData);
-      localStorage.setItem('formData', JSON.stringify(updatedFormData));
-    }}
-  />
-  <p>1. Open <a href="https://t.me/BotFather">@BotFather</a>.</p>
-  <p>2. Create a new bot.</p>
-  <p>3. Copy token access API.</p>
-  <p>4. Example: <code>123456789:ABCdefGhiJKlmNOPqrSTUvwXYZ</code></p>
-</div>
+              <label htmlFor="bot">Bot API</label>
+              <input
+                type="text"
+                id="bot"
+                placeholder="mnjDN_22nDU-WEJKCX..."
+                value={botAPI}
+                onChange={(e) => {
+                  const updatedFormData = { ...formData, botAPI: e.target.value };
+                  setBotAPI(e.target.value);
+                  setFormData(updatedFormData);
+                  localStorage.setItem('formData', JSON.stringify(updatedFormData));
+                }}
+              />
+              <p>1. Open <a href="https://t.me/BotFather">@BotFather</a>.</p>
+              <p>2. Create a new bot.</p>
+              <p>3. Copy token access API.</p>
+              <p>4. Example: <code>123456789:ABCdefGhiJKlmNOPqrSTUvwXYZ</code></p>
+            </div>
 
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '../ProgressBar';
-import { initHapticFeedback } from '@telegram-apps/sdk'; // Импорт haptic feedback
+// import { initHapticFeedback } from '@telegram-apps/sdk'; // Импорт haptic feedback
 import './Step4.css';
 
 const Step4 = ({ formData, setFormData }) => {
@@ -10,7 +10,7 @@ const Step4 = ({ formData, setFormData }) => {
   const [address, setAddress] = useState(formData.address || '');
 
   const navigate = useNavigate();
-  const hapticFeedback = initHapticFeedback(); // Инициализация haptic feedback
+  // const hapticFeedback = initHapticFeedback(); // Инициализация haptic feedback
 
   useEffect(() => {
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
@@ -40,12 +40,12 @@ const Step4 = ({ formData, setFormData }) => {
       default:
         break;
     }
-    hapticFeedback.selectionChanged(); // Haptic feedback при изменении значения инпута
+    // hapticFeedback.selectionChanged(); // Haptic feedback при изменении значения инпута
   };
 
   const handleNext = () => {
-    hapticFeedback.notificationOccurred('success'); // Haptic feedback при нажатии на кнопку "Next"
-    navigate('/create-store/step5');
+    // hapticFeedback.notificationOccurred('success'); // Haptic feedback при нажатии на кнопку "Next"
+    navigate('/create-store/step6');
   };
 
   return (
@@ -91,6 +91,15 @@ const Step4 = ({ formData, setFormData }) => {
               value={address}
               onChange={(e) => handleInputChange(e, 'address')}
             />
+          </div>
+
+          {/* CPA Checkbox */}
+          <div className="input-group check_box-cpa">
+            <div className="cpa">Powered by SPRUTON</div>
+            <label className="switch">
+              <input type="checkbox" />
+              <span className="slider"></span>
+            </label>
           </div>
         </div>
       </div>

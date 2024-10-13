@@ -2,105 +2,138 @@ import React, { useState } from 'react';
 import './Settings.css'; // Импортируйте файл стилей
 
 const Settings = () => {
-  const [storeType, setStoreType] = useState('Shop');
-  const [currency, setCurrency] = useState('USD');
-  const [payments, setPayments] = useState('Crypto, Bank cards');
+  const [merchantType, setMerchantType] = useState('Business');
+  const [storeType, setStoreType] = useState('Store');
+  const [theme, setTheme] = useState('Default');
   const [language, setLanguage] = useState('English');
-  const [delivery, setDelivery] = useState('FeedEx');
+  const [currency, setCurrency] = useState('USD');
+  const [poweredBy, setPoweredBy] = useState(false);
+
+  const [showMerchantOptions, setShowMerchantOptions] = useState(false);
+  const [showStoreTypeOptions, setShowStoreTypeOptions] = useState(false);
+  const [showThemeOptions, setShowThemeOptions] = useState(false);
+  const [showLanguageOptions, setShowLanguageOptions] = useState(false);
+  const [showCurrencyOptions, setShowCurrencyOptions] = useState(false);
+
+  const toggleOptions = (setter) => {
+    setter((prevState) => !prevState);
+  };
+
+  const handleOptionSelect = (setter, value, setterVisibility, event) => {
+    event.stopPropagation(); // Останавливаем распространение события
+    setter(value);
+    setterVisibility(false);
+  };
 
   return (
     <div className="container setting-wrap">
       <div className="container_wrap">
+        {/* Seller details */}
         <div className="input-group">
-          <label htmlFor="shop-logo">Shop logo</label>
-          <div className="shop_logo-load"></div>
+          <label htmlFor="merchant-type">Merchant</label>
+          <div className="custom-select" onClick={() => toggleOptions(setShowMerchantOptions)}>
+            <div className="select-selected">
+              {merchantType}
+            </div>
+            {showMerchantOptions && (
+              <div className="select-items">
+                {['Business', 'Personal'].map(option => (
+                  <div key={option} onClick={(event) => handleOptionSelect(setMerchantType, option, setShowMerchantOptions, event)}>{option}</div>
+                ))}
+              </div>
+            )}
+            <i className="arrow-down"></i>
+          </div>
         </div>
+
+        {/* Shop settings */}
         <div className="input-group">
-          <label htmlFor="currency">Type of store</label>
-          <div className="custom-select" id="store-type">
-            <div className="select-selected" onClick={() => document.getElementById('store-type-items').classList.toggle('select-hide')}>
+          <label htmlFor="store-type">Type</label>
+          <div className="custom-select" onClick={() => toggleOptions(setShowStoreTypeOptions)}>
+            <div className="select-selected">
               {storeType}
             </div>
-            <div className="select-items select-hide" id="store-type-items">
-              {['Store', 'Service', 'Shop'].map(option => (
-                <div key={option} onClick={() => setStoreType(option)}>{option}</div>
-              ))}
-            </div>
+            {showStoreTypeOptions && (
+              <div className="select-items">
+                {['Store', 'Booking', 'Delivery'].map(option => (
+                  <div key={option} onClick={(event) => handleOptionSelect(setStoreType, option, setShowStoreTypeOptions, event)}>{option}</div>
+                ))}
+              </div>
+            )}
             <i className="arrow-down"></i>
           </div>
         </div>
+
         <div className="input-group">
-          <label htmlFor="store-name">Name of store</label>
-          <input type="text" id="store-name" placeholder="Toy Seller" />
-        </div>
-        <div className="input-group">
-          <label htmlFor="store-description">Description of store</label>
-          <textarea id="store-description" placeholder="Description"></textarea>
-        </div>
-        <div className="input-group">
-          <label htmlFor="currency">Currency</label>
-          <div className="custom-select" id="currency">
-            <div className="select-selected" onClick={() => document.getElementById('currency-items').classList.toggle('select-hide')}>
-              {currency}
+          <label htmlFor="theme">Theme</label>
+          <div className="custom-select" onClick={() => toggleOptions(setShowThemeOptions)}>
+            <div className="select-selected">
+              {theme}
             </div>
-            <div className="select-items select-hide" id="currency-items">
-              {['USD', 'EUR', 'GBP'].map(option => (
-                <div key={option} onClick={() => setCurrency(option)}>{option}</div>
-              ))}
-            </div>
+            {showThemeOptions && (
+              <div className="select-items">
+                {['Default', 'Dark', 'Light'].map(option => (
+                  <div key={option} onClick={(event) => handleOptionSelect(setTheme, option, setShowThemeOptions, event)}>{option}</div>
+                ))}
+              </div>
+            )}
             <i className="arrow-down"></i>
           </div>
         </div>
-        <div className="input-group">
-          <label htmlFor="payments">Payments</label>
-          <div className="custom-select" id="payments">
-            <div className="select-selected" onClick={() => document.getElementById('payments-items').classList.toggle('select-hide')}>
-              {payments}
-            </div>
-            <div className="select-items select-hide" id="payments-items">
-              {['Crypto, Bank cards', 'PayPal', 'Stripe'].map(option => (
-                <div key={option} onClick={() => setPayments(option)}>{option}</div>
-              ))}
-            </div>
-            <i className="arrow-down"></i>
-          </div>
-        </div>
+
         <div className="input-group">
           <label htmlFor="language">Language</label>
-          <div className="custom-select" id="language">
-            <div className="select-selected" onClick={() => document.getElementById('language-items').classList.toggle('select-hide')}>
+          <div className="custom-select" onClick={() => toggleOptions(setShowLanguageOptions)}>
+            <div className="select-selected">
               {language}
             </div>
-            <div className="select-items select-hide" id="language-items">
-              {['English', 'Spanish', 'French'].map(option => (
-                <div key={option} onClick={() => setLanguage(option)}>{option}</div>
-              ))}
-            </div>
+            {showLanguageOptions && (
+              <div className="select-items">
+                {['English', 'Spanish', 'French'].map(option => (
+                  <div key={option} onClick={(event) => handleOptionSelect(setLanguage, option, setShowLanguageOptions, event)}>{option}</div>
+                ))}
+              </div>
+            )}
             <i className="arrow-down"></i>
           </div>
         </div>
-        <div className="input-group">
-          <label htmlFor="delivery">Delivery</label>
-          <div className="custom-select" id="delivery">
-            <div className="select-selected" onClick={() => document.getElementById('delivery-items').classList.toggle('select-hide')}>
-              {delivery}
-            </div>
-            <div className="select-items select-hide" id="delivery-items">
-              {['FeedEx', 'DHL', 'UPS'].map(option => (
-                <div key={option} onClick={() => setDelivery(option)}>{option}</div>
-              ))}
-            </div>
-            <i className="arrow-down"></i>
-          </div>
-        </div>
-        <div className="input-group">
-          <label htmlFor="channel-link">Channel link</label>
-          <input type="text" id="channel-link" placeholder="Enter channel link" />
-        </div>
+
         <div className="input-group">
           <label htmlFor="bot-api">Bot API</label>
           <input type="text" id="bot-api" placeholder="Enter bot API token" />
         </div>
+
+        {/* Shop details */}
+        <div className="input-group">
+          <label htmlFor="shop-logo">Logo</label>
+          <div className="shop_logo-load"></div>
+        </div>
+        <div className="input-group">
+          <label htmlFor="store-name">Name</label>
+          <input type="text" id="store-name" placeholder="Toy Seller" />
+        </div>
+        <div className="input-group">
+          <label htmlFor="store-description">Description</label>
+          <textarea id="store-description" placeholder="Description"></textarea>
+        </div>
+        <div className="input-group">
+          <label htmlFor="currency">Currency</label>
+          <div className="custom-select" onClick={() => toggleOptions(setShowCurrencyOptions)}>
+            <div className="select-selected">
+              {currency}
+            </div>
+            {showCurrencyOptions && (
+              <div className="select-items">
+                {['USD', 'EUR', 'GBP'].map(option => (
+                  <div key={option} onClick={(event) => handleOptionSelect(setCurrency, option, setShowCurrencyOptions, event)}>{option}</div>
+                ))}
+              </div>
+            )}
+            <i className="arrow-down"></i>
+          </div>
+        </div>
+
+        {/* Additional details */}
         <div className="input-group">
           <label htmlFor="email">E-mail</label>
           <input type="email" id="email" placeholder="Enter email address" />
@@ -109,13 +142,27 @@ const Settings = () => {
           <label htmlFor="phone">Phone</label>
           <input type="tel" id="phone" placeholder="Enter phone number" />
         </div>
+        <div className="input-group">
+          <label htmlFor="address">Address</label>
+          <textarea id="address" placeholder="Enter address"></textarea>
+        </div>
+
+        {/* Powered by SPRUTON */}
+        <div className="input-group check_box-cpa">
+          <div className="cpa">Powered by SPRUTON</div>
+          <label className="switch">
+            <input type="checkbox" checked={poweredBy} onChange={() => setPoweredBy(!poweredBy)} />
+            <span className="slider"></span>
+          </label>
+        </div>
       </div>
 
       <div className="footers fix-footer">
         <div className="contents">
           <div className="btn btn-catalog">Save</div>
         </div>
-      </div>    </div>
+      </div>
+    </div>
   );
 };
 

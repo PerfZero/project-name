@@ -10,6 +10,8 @@
     color: var(--tg-theme-three-text);
     padding-top: 25px;
     margin-top: 0;
+    margin-right: 20px;
+    
 }
 
 .order.store-header {
@@ -20,7 +22,13 @@
     align-items: flex-start;
     margin-bottom: 0;
     background-color: #fff;
+        overflow: auto;
+    white-space: nowrap;
 }   
+
+.success-title{
+    margin-bottom: 30px;
+}
 
 .activet::before{
     content: "";
@@ -31,6 +39,14 @@
     bottom: 0;
     border-radius: 5px 5px 0 0;
     background-color: #d53e76;
+}
+
+a:active, a:focus, a:hover {
+    text-decoration: none !important;
+}
+
+p+p {
+    margin-top: 0 !important;
 }
 
 .activet{

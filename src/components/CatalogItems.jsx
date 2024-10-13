@@ -5,7 +5,7 @@ import './CatalogItems.css';
 const items = [
   { id: 1, category: 'Trains', name: 'Train', pieces: '486 pieces', price: '$1,200', image: '/img/catalog-pic.png', status: 'CPA' },
   { id: 2, category: 'Cars', name: 'Car', pieces: '48 pieces', price: '$820', image: '/img/car.png' },
-  { id: 3, category: 'Puzzle', name: 'Piramide', pieces: '486 pieces', price: '$1,200', image: '/img/off-piramide.png', status: 'off' },
+  { id: 3, category: 'Puzzle', name: 'Piramide', pieces: '486 pieces', price: '$1,200', image: '/img/off-piramide.png' },
   { id: 4, category: 'Dino', name: 'Dino', pieces: '486 pieces', price: '$1,200', image: '/img/dino.png' },
 ];
 

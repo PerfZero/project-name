@@ -105,9 +105,19 @@
     text-align: center;
     align-content: center;
     padding-right: 0 !important;
-
     padding: 2px 5px !important;
     border-radius: 6px;
+
+}
+
+.order-contents  > .order-filter > .filter-class-item > .filter-item{
+    flex: 1;
+}
+
+
+.filterback--off{
+    background: none !important;
+    padding: 0 !important;
 }
 
 .canceled {
@@ -120,12 +130,15 @@
 }
 
 .filter-detail {
+    pointer-events: none;
     color: var(--tg-theme-three-filter);
     padding-right: 15px;
     font-family: "SF Pro Display", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 400;
+    position: absolute;
+    right: 22px;
 }
 
 .number-list__info {
@@ -141,4 +154,10 @@
     background-color: var(--tg-theme-bg-def);
     padding: 0 0 0 12px;
     border-radius: 10px;
+}
+
+.input-box {
+    display: flex !important;
+    flex-wrap: wrap;
+    height: auto !important;
 }

@@ -1,13 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { DateRangePicker } from 'rsuite';
+import { addDays, format } from 'date-fns';
+import { enGB } from 'date-fns/locale'; // Импортируйте нужную локаль
+import 'rsuite/dist/rsuite.min.css'; // Импортируйте стили rsuite
 import './Analytics.css'; // Импортируйте файл стилей, если у вас есть стили
 
+const predefinedRanges = [
+  {
+    label: 'Today',
+    value: [new Date(), new Date()],
+    placement: 'left'
+  },
+  {
+    label: 'Yesterday',
+    value: [addDays(new Date(), -1), addDays(new Date(), -1)],
+    placement: 'left'
+  },
+  {
+    label: 'Last 7 Days',
+    value: [addDays(new Date(), -7), new Date()],
+    placement: 'left'
+  },
+  {
+    label: 'Last 30 Days',
+    value: [addDays(new Date(), -30), new Date()],
+    placement: 'left'
+  }
+];
+
+const formatDateRange = (startDate, endDate, locale) => {
+  const start = format(startDate, 'dd MMMM yyyy', { locale });
+  const end = format(endDate, 'dd MMMM yyyy', { locale });
+  return `${start} - ${end}`;
+};
+
 const Analytics = () => {
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+
   return (
     <div className="order-contents fix">
       <div className="order-filter analitics">
         <div className="filter-class-item">
           <p className="filter-item" id="catalog-categories">Period</p>
-          <p className="filter-detail">10-16 June 2024</p>
+          <DateRangePicker
+            value={dateRange}
+            onChange={setDateRange}
+            showOneCalendar
+            ranges={predefinedRanges}
+            format="MM/dd/yyyy HH:mm"
+            style={{ width: '100%' }} // Устанавливаем ширину на 100% для адаптации к мобильным устройствам
+          />
+          <p className="filter-detail">{formatDateRange(dateRange[0], dateRange[1], enGB)}</p>
         </div>
       </div>
       <div className="order-filter statics_wrap">
